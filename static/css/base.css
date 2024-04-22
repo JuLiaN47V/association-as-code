@@ -1,0 +1,18 @@
+.gallerycard{
+    width: 18rem;
+    padding-top: 1%;
+    margin: 1%;
+}
+
+.card{
+    border-color: rgba(var(--bs-primary-rgb)) !important;
+}
+
+.footer{
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: .03;
+}

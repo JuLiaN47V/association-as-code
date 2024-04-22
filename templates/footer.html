@@ -1,0 +1,37 @@
+{{ $entry := .config }}
+{{ $lang := .lang}}
+{{ if $entry.footer.socials }}
+<div class="row">
+    <h1 class="text-center mt-4" id="social">Social</h1>
+</div>
+<div class="row">
+    {{ range $platform := $entry.footer.socials }}
+    <div class="col pt-4" align="center">
+        <a href="{{ $platform.link }}" target="_blank">
+            <img src="static/img/{{ $platform.image }}" class="pt-4 pb-2" style="max-width: 10vw;">
+            <h5 class="d-lg-block d-none">{{ $platform.account }}</h5>
+        </a>
+    </div>
+    {{ end}}
+</div>
+{{ end }}
+{{ if $entry.footer.contact }}
+<div class="row">
+    <h1 class="text-center mt-4" id="contact">{{ if $lang.contact }}{{  $lang.contact }}{{ else }}Contact{{ end }}</h1>
+</div>
+<div class="row">
+    {{ range $contact := $entry.footer.contact }}
+    <h3 class="text-center"> {{ $contact.title }}</h3>
+    <p class="text-center" >{{ $contact.name }}</p>
+    {{ if $contact.address }}
+    <p class="text-center" >{{ $contact.address }}</p>
+    {{end }}
+    <p class="text-center" >{{ $contact.email }}</p>
+    {{ if $contact.tel }}
+    <p class="text-center" >{{ $contact.tel }}</p>
+    {{ end }}
+    {{ end }}
+</div>
+{{ end }}
+
+

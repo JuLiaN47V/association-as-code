@@ -1,0 +1,49 @@
+head:
+  logo: "logo.svg"
+  name: "Association Name"
+  icon: "logo.ico"
+  description: "Description"
+  slogan:
+    font: "Sofia, sans-serif"
+    top: "Your"
+    bottom: "Slogan"
+body:
+  - name: "Football"
+    contact:
+      - name: "Don Joe"
+        title: "responsible"
+        description: "responsible for Example Sport"
+        tel: "555123456"
+    gallery: 
+      - title: "Example Image"
+        src: "example-image.webp"
+footer:
+  background_image: "example-background.svg"
+  socials:
+    - account: "fc_example_1900"
+      link: "https://www.instagram.com/fc_example_1900/"
+      image: "insta.svg"
+  contact:
+    - title: "Board"
+      name: "John Doe"
+      address: "Example str. 42 | 12345 City"
+      email: "john.doe@example.com"
+      tel: "555 / 123456"
+      responsible: true
+fonts:
+  - name: "Sofia"
+    src: "Sofia-Regular.woff"
+    font_weight: "normal"
+    font_style: "normal"
+calendar:
+  - name: "Games"
+    url: "https://example.com/nextcloud/apps/calendar/p/xxxxxxxxxx"
+files:
+  - name: "Membership application"
+    url: "https://example.com/nextcloud/f/000"
+lang_file: "lang.yaml"
+linked_sites:
+  - name: "Cloud"
+    url: "https://cloud.example.com/"
+  - name: "Article"
+    url: "https://example.com/article"
