@@ -28,7 +28,7 @@ git clone https://github.com/JuLiaN47V/association-as-code.git && cd association
 ```
 After that, simply run:
 ``` bash
-go run main.go
+go run main.go -d
 ```
 
 Either way, you can access your webserver now at http://localhost:8090.
