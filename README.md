@@ -56,7 +56,7 @@ The head-key is a map with following second-level-keys:
 ### Body[List]
 The body is a list, consisting of maps as list-elemnts with the second-level-keys:
    - name[String] -> Headline of section
-   - contact[List] -> List of contact maps
+   - contacts[List] -> List of contact maps
    - gallery[List] -> List of image maps
 #### Contacts[List]
 Contact is a list, consisting of maps as list-elemnts with the third-level-keys:
@@ -72,7 +72,7 @@ Gallery is a list, consisting of maps as list-elemnts with the third-level-keys:
 The footer-key is a map with following second-level-keys:
    - background_image[String] -> Filename of image-file for background with low opacity
    - socials[List] -> List of social platform maps
-   - contact[List] -> List of contact maps for association
+   - contacts[List] -> List of contact maps for association
 #### Socials[List]
 Socials is a list, consisting of maps as list-elemnts with the third-level-keys:
   - account[String] -> Name of Account
