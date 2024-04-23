@@ -9,7 +9,7 @@ head:
     bottom: "Slogan"
 body:
   - name: "Football"
-    contact:
+    contacts:
       - name: "Don Joe"
         title: "responsible"
         description: "responsible for Example Sport"
@@ -23,7 +23,7 @@ footer:
     - account: "fc_example_1900"
       link: "https://www.instagram.com/fc_example_1900/"
       image: "insta.svg"
-  contact:
+  contacts:
     - title: "Board"
       name: "John Doe"
       address: "Example str. 42 | 12345 City"
@@ -35,7 +35,7 @@ fonts:
     src: "Sofia-Regular.woff"
     font_weight: "normal"
     font_style: "normal"
-calendar:
+calendars:
   - name: "Games"
     url: "https://example.com/nextcloud/apps/calendar/p/xxxxxxxxxx"
 files:
