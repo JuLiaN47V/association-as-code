@@ -35,37 +35,74 @@ Either way, you can access your webserver now at http://localhost:8090.
 
 ## Custom Config
 The config got following top-level-keys:
-  - head -> Banner + navbar
-  - body -> Different departments of association
-  - footer -> Social + Contact
-  - fonts -> Custom Fonts
-  - calendar -> Navbar dropdown menu
-  - files -> Navbar dropdown menu
-  - linked_sites -> Navbar element linked to different site
-### Head
-Under the head-key are following second-level-keys:
+  - head[Map] -> Banner + navbar
+  - body[List] -> Different departments of association
+  - footer[MAP] -> Social + Contact
+  - fonts[List] -> Custom Fonts
+  - calendars[List] -> Navbar dropdown menu
+  - files[List] -> Navbar dropdown menu
+  - linked_sites[List] -> Navbar element linked to different site
+### Head[MAP]
+The head-key is a map with following second-level-keys:
   - logo[String] -> Filename of logo-image-file
   - name[String] -> Name of association
   - icon[String] -> Filename of icon-file
   - description[String] -> Description display on google search
-  - sloga -> Slogan above and underneath the main headline with custom font
-#### Slogan
+  - slogan[MAP] -> Slogan above and underneath the main headline with custom font
+#### Slogan[MAP]
   - font[String] -> Fontname, Kind
   - top[String] -> Slogan above main headline
   - bottom[String] -> Slogan underneath main headline
-### Body
+### Body[List]
 The body is a list, consisting of maps as list-elemnts with the second-level-keys:
    - name[String] -> Headline of section
-   - contact -> List of contacts
-   - gallery -> List of images
-#### Contact
+   - contact[List] -> List of contact maps
+   - gallery[List] -> List of image maps
+#### Contacts[List]
 Contact is a list, consisting of maps as list-elemnts with the third-level-keys:
   - name[String] -> Name of Person
   - title[String] -> Title in association
   - description[String] -> Description of work
   - tel[String] -> telephonenumber
-
-#### Gallery
-
+#### Gallery[List]
+Gallery is a list, consisting of maps as list-elemnts with the third-level-keys:
+  - title[String] -> Title of image
+  - src[String] -> Filename of image-file
+### Footer[Map]
+The footer-key is a map with following second-level-keys:
+   - background_image[String] -> Filename of image-file for background with low opacity
+   - socials[List] -> List of social platform maps
+   - contact[List] -> List of contact maps for association
+#### Socials[List]
+Socials is a list, consisting of maps as list-elemnts with the third-level-keys:
+  - account[String] -> Name of Account
+  - link[String] -> Link to account of social platform
+  - image[String] -> Filename of image-file for social platform
+#### Contact[List]
+  - title[String] -> Title of Contact
+  - name[String] -> Name of Contact
+  - address[String] -> Address of Contact
+  - email[String] -> eMail of Contact
+  - tel[String] -> telephonenumber of contact
+  - responsible[Bool] -> If Contact is responsible for the association
+### Fonts[List]
+  - name[String] -> Name of Font
+  - src[String] -> Filename of font-file in side fonts directory
+  - font_weight[String] -> Name of font weight
+  - font_style[String] -> Name of font style
+### Calendars[List]
+Calendars is a list, consisting of maps as list-elemnts with the second-level-keys:
+  - name[String] -> Name of calendar
+  - url[String] -> URL of calendar
+### Files[List]
+Files is a list, consisting of maps as list-elemnts with the second-level-keys:
+  - name[String] -> Name of File
+  - url[String] -> URL of File
+### linked_sites[List]
+Linked_sites is a list, consisting of maps as list-elemnts with the second-level-keys:
+  - name[String] -> Name of Site
+  - url[String] -> URL of Site
+### lang_file[String]
+Filename of language-file to use inside "lang" directory
 
 ## Custom Language
