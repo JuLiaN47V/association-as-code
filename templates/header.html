@@ -37,8 +37,8 @@
                   {{ $section.name }}
                 </a>
                 <ul class="dropdown-menu">
-                  {{ if $section.contact }}
-                  <li><a class="dropdown-item" href="{{ .uri }}/#{{ $section.name }}Contact">{{ if $lang.contact }}{{ $lang.contact }}{{ else }}Contact{{ end }}</a></li>
+                  {{ if $section.contacts }}
+                  <li><a class="dropdown-item" href="{{ .uri }}/#{{ $section.name }}Contacts">{{ if $lang.contacts }}{{ $lang.contacts }}{{ else }}Contacts{{ end }}</a></li>
                   {{ end }}
                   {{ if $section.gallery }}
                   <li><a class="dropdown-item" href="{{ .uri }}/#{{ $section.name }}Gallery">{{ if $lang.gallery}}{{ $lang.gallery }}{{ else }}Gallery{{ end }}</a></li>
@@ -47,13 +47,13 @@
               </li>
           {{ end }}
 
-          {{ if .config.calendar }}
+          {{ if .config.calendars }}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  {{ if $lang.calendar }}{{ $lang.calendar }}{{ else }}Calendar{{ end }}
+                  {{ if $lang.calendars }}{{ $lang.calendars }}{{ else }}Calendars{{ end }}
                 </a>
                 <ul class="dropdown-menu">
-                  {{ range $calendar := .config.calendar }}
+                  {{ range $calendar := .config.calendars }}
                   <li><a class="dropdown-item" href="{{ $calendar.url }}" target="_blank">{{ $calendar.name }}</a></li>
                   {{ end }}
                 </ul>
@@ -77,7 +77,7 @@
           </li>
           {{ end }}
           <li class="nav-item">
-            <a class="nav-link active text-secondary" href="{{ .uri }}/#contact">{{ if $lang.contact }}{{ $lang.contact }}{{ else }}Contact{{ end }}
+            <a class="nav-link active text-secondary" href="{{ .uri }}/#contacts">{{ if $lang.contacts }}{{ $lang.contacts }}{{ else }}Contacts{{ end }}
             </a>
           </li>
           {{ if .config.cloud }}

@@ -15,12 +15,12 @@
     {{ end}}
 </div>
 {{ end }}
-{{ if $entry.footer.contact }}
+{{ if $entry.footer.contacts }}
 <div class="row">
-    <h1 class="text-center mt-4" id="contact">{{ if $lang.contact }}{{  $lang.contact }}{{ else }}Contact{{ end }}</h1>
+    <h1 class="text-center mt-4" id="contacts">{{ if $lang.contacts }}{{  $lang.contacts }}{{ else }}Contacts{{ end }}</h1>
 </div>
 <div class="row">
-    {{ range $contact := $entry.footer.contact }}
+    {{ range $contact := $entry.footer.contacts }}
     <h3 class="text-center"> {{ $contact.title }}</h3>
     <p class="text-center" >{{ $contact.name }}</p>
     {{ if $contact.address }}
