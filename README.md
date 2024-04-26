@@ -37,3 +37,4 @@ Either way, you can access your webserver now at http://localhost:8090.
 ## Custom Config
 See [config.yaml](https://github.com/JuLiaN47V/association-as-code/wiki/config.yaml) for detailed informations.
 ## Custom Language
+See [Custom Language](https://github.com/JuLiaN47V/association-as-code/wiki/Custom-Language) for detailed Informations
