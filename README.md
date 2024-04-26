@@ -28,10 +28,14 @@ First you habe to clone this repository:
 ``` bash
 git clone https://github.com/JuLiaN47V/association-as-code.git && cd association-as-code
 ```
-After that, simply run:
+After that, simply run for a example webserver:
 ``` bash
 go run main.go -d
 ```
+
+#### main.go Flags
+-d Debug Mode  
+-w Watch config.yaml for changes
 
 Either way, you can access your webserver now at http://localhost:8090.
 
