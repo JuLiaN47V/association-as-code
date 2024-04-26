@@ -19,7 +19,7 @@ After that, mount your config into :/app/config.yaml and your language-file to :
 For bootstrap customization like color change, follow [Custom-CSS](https://github.com/JuLiaN47V/association-as-code/wiki/Custom-CSS) wiki.
 
 ``` docker
--v config.yaml:/app/config.yaml -v en.yaml:/app/langs/en.yaml -v bootstrap:/app/static/bootstrap/
+-v config.yaml:/app/config.yaml -v en.yaml:/app/langs/en.yaml -v static/css/bootstrap.css:/app/static/bootstrap/bootstrap.css
 ```
 
 ### From Source
