@@ -14,7 +14,7 @@ docker run -d -p 8090:8090 julian47/association-as-code:webserver
 ```
 
 For customization, you can add you own config- and language-file.  
-To do that, you have to create the files config.yaml and en.yaml. See [Custom Config](#custom-config) and [Custom language](#custom-language) for specification and how to use your own language-file.  
+To do that, you have to create the files config.yaml and en.yaml. See [Custom Config](https://github.com/JuLiaN47V/association-as-code/wiki/config.yaml) and [Custom language](#custom-language) for specification and how to use your own language-file.  
 After that, mount your config into :/app/config.yaml and your language-file to :/app/langs/en.yaml  
 
 ``` docker
