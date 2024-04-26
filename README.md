@@ -13,12 +13,13 @@ To run the pre-defined example webserver, run:
 docker run -d -p 8090:8090 julian47/association-as-code:webserver
 ```
 
-For customization, you can add you own config- and language-file.  
+For customization, you can add you own config-file, language-file and customized bootstap.  
 To do that, you have to create the files config.yaml and en.yaml. See [Custom Config](https://github.com/JuLiaN47V/association-as-code/wiki/config.yaml) and [Custom language](#custom-language) for specification and how to use your own language-file.  
 After that, mount your config into :/app/config.yaml and your language-file to :/app/langs/en.yaml  
+For bootstrap customization like color change, follow [Custom-CSS](https://github.com/JuLiaN47V/association-as-code/wiki/Custom-CSS) wiki.
 
 ``` docker
--v config.yaml:/app/config.yaml -v en.yaml:/app/langs/en.yaml
+-v config.yaml:/app/config.yaml -v en.yaml:/app/langs/en.yaml -v bootstrap:/app/static/bootstrap/
 ```
 
 ### From Source
@@ -38,3 +39,5 @@ Either way, you can access your webserver now at http://localhost:8090.
 See [config.yaml](https://github.com/JuLiaN47V/association-as-code/wiki/config.yaml) for detailed informations.
 ## Custom Language
 See [Custom Language](https://github.com/JuLiaN47V/association-as-code/wiki/Custom-Language) for detailed Informations
+## Custom CSS
+If you want to make changes to default bootstrap configuration, follow [Custom-CSS](https://github.com/JuLiaN47V/association-as-code/wiki/Custom-CSS).
