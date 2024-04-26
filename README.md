@@ -1,6 +1,7 @@
 ## Association As Code
 This project is designed for associations in order to run a templated webserver.  
 The Goal is to make it easy to run a simple, customizeable website.
+Licensed under [Apache 2.0](https://github.com/JuLiaN47V/association-as-code/tree/main?tab=Apache-2.0-1-ov-file#)
 
 ## Getting started
 You can either run the webserver within docker or directly from source.
