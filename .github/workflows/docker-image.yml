@@ -1,6 +1,11 @@
 name: Docker Image Test
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - '*'
+      - '!master'
+  pull_request:
 
 env:
   TEST_TAG: julian47/association-as-code:test
