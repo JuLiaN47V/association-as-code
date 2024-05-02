@@ -30,11 +30,11 @@ jobs:
           tags: ${{ env.TEST_TAG }}
       - name: Test
         run: |
-          docker run --rm -d --name ${{ env.CONTAINER_NAME }} ${{ env.TEST_TAG }}
+          docker run --rm -d --name ${{ env.CONTAINER_NAME }} ${{ env.TEST_TAG }} -d
       - name: Curl
         uses: indiesdev/curl@v1.1
         with:
-          url: http://127.0.0.1:80
+          url: http://127.0.0.1:8090
       - name: Remove docker container
         run: |
           docker rm -f ${{ env.CONTAINER_NAME }}
