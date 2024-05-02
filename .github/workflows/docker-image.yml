@@ -30,7 +30,7 @@ jobs:
           tags: ${{ env.TEST_TAG }}
       - name: Test
         run: |
-          docker run --rm -d --name ${{ env.CONTAINER_NAME }} ${{ env.TEST_TAG }} -d
+          docker run --rm -d -p 8090:8090 --name ${{ env.CONTAINER_NAME }} ${{ env.TEST_TAG }} -d
       - name: Curl
         uses: indiesdev/curl@v1.1
         with:
