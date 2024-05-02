@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image Merge
 
 on: [push, pull_request]
 
@@ -28,20 +28,23 @@ jobs:
           context: .
           load: true
           tags: ${{ env.TEST_TAG }}
-      - name: Test
+      - name: Test Debug
         run: |
-          docker run --rm -d -p 8090:8090 --name ${{ env.CONTAINER_NAME }} ${{ env.TEST_TAG }} -d
+          docker run --rm -d -p 8090:8090 --name ${{ env.CONTAINER_NAME }}-debug ${{ env.TEST_TAG }} -d
       - name: Curl
         uses: indiesdev/curl@v1.1
         with:
           url: http://127.0.0.1:8090
       - name: Remove docker container
         run: |
-          docker rm -f ${{ env.CONTAINER_NAME }}
-      - name: Build and push
-        uses: docker/build-push-action@v5
+          docker rm -f ${{ env.CONTAINER_NAME }}-debug
+      - name: Test Production
+        run: |
+          docker run --rm -d -p 80:80 --name ${{ env.CONTAINER_NAME }}-production ${{ env.TEST_TAG }}
+      - name: Curl
+        uses: indiesdev/curl@v1.1
         with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ env.LATEST_TAG }}
+          url: http://127.0.0.1:80
+      - name: Remove docker container
+        run: |
+          docker rm -f ${{ env.CONTAINER_NAME }}-production 
