@@ -47,3 +47,6 @@ linked_sites:
     url: "https://cloud.example.com/"
   - name: "Article"
     url: "https://example.com/article"
+custom_pages:
+  - name: "Dataprotection"
+    file: "dataprotection.html"

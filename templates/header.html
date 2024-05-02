@@ -95,6 +95,13 @@
           </li>
           {{ end }}
           {{ end }}
+          {{ if .customPages }}
+          {{ range $customPage := .customPages }}
+          <li class="nav-item">
+            <a class="nav-link active text-secondary" href="{{ $customPage.name }}">{{ $customPage.name }}</a>
+          </li>
+          {{ end }}
+          {{ end }}
         </ul>
       </div>
     </div>

@@ -3,12 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
+	"github.com/fsnotify/fsnotify"
 	"github.com/gin-gonic/gin"
 	"gopkg.in/yaml.v2"
-	"github.com/fsnotify/fsnotify"
-	"log"
 )
 
 
@@ -87,6 +87,7 @@ func main() {
 
 
 
+	// Flags
 	var watchFlag bool
 	var debugFlag bool
 	flag.BoolVar(&watchFlag, "w", false, "Watch config file for changes")
@@ -100,23 +101,50 @@ func main() {
 	if !debugFlag {
 		gin.SetMode(gin.ReleaseMode)
 	}
-	router := gin.Default()
-	router.Static("/static", "static")
+	// End Flags
 
+
+
+
+	router := gin.Default()
+
+	// Static Router
+	router.Static("/static", "static")
+	// End Static Router
+
+	// Custom Pages Router
+	customPages := configYAML["custom_pages"].([]interface {})
+	mapString := make(map[string]string)
+	for _, value := range customPages {
+		for key, test := range value.(map[interface {}]interface {}){
+			strKey := fmt.Sprintf("%v", key)
+			strValue := fmt.Sprintf("%v", test)
+			mapString[strKey] = strValue
+		}
+		routePath := "/" + mapString["name"]
+		router.GET(routePath, func(c *gin.Context) {
+			c.HTML(http.StatusOK, mapString["file"], gin.H{
+				"uri":    "http://" + c.Request.Host,
+				"config": configYAML,
+				"lang": langYAML,
+				"customPages" : customPages,
+			})
+		})
+	}
+	// End Custom Pages Router
+
+	// Index Router
 	router.LoadHTMLGlob("templates/*")
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{
 			"uri":    "http://" + c.Request.Host,
 			"config": configYAML,
 			"lang": langYAML,
+			"customPages" : customPages,
 		})
 	})
-	router.GET("/dataprotection", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "dataprotection.html", gin.H{
-			"uri":    "http://" + c.Request.Host,
-			"config": configYAML,
-		})
-	})
+   // End Index Router
+
 
 	if debugFlag {
 		router.Run(":8090")
