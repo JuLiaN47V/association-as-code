@@ -13,4 +13,4 @@ COPY langs langs/
 COPY config.yaml .
 COPY --from=build /app/webserver .
 EXPOSE 80
-CMD ["./webserver"]
+ENTRYPOINT ["/app/webserver"]
