@@ -1,15 +1,12 @@
-name: Docker Image Test
+name: Docker Image on Release
 
 on:
-  push:
-    branches:
-      - '*'
-      - '!master'
-  pull_request:
+  release:
+    types: [released]
 
 env:
   TEST_TAG: julian47/association-as-code:test
-  LATEST_TAG: julian47/association-as-code:latest
+  LATEST_TAG: julian47/association-as-code:${{ GITHUB_REF_NAME }}
   CONTAINER_NAME: aas_test
 
 jobs:
