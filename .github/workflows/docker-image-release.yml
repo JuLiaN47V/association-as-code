@@ -49,4 +49,13 @@ jobs:
           url: http://127.0.0.1:80
       - name: Remove docker container
         run: |
-          docker rm -f ${{ env.CONTAINER_NAME }}-production 
+          docker rm -f ${{ env.CONTAINER_NAME }}-production
+            - name: Build and push
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ env.LATEST_TAG }}
+          
