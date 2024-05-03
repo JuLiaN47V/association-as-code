@@ -6,7 +6,7 @@ on:
 
 env:
   TEST_TAG: julian47/association-as-code:test
-  LATEST_TAG: julian47/association-as-code:$GITHUB_REF_NAME
+  LATEST_TAG: julian47/association-as-code:${{ github.ref_name }}
   CONTAINER_NAME: aas_test
 
 jobs:
