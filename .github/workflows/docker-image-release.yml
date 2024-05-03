@@ -50,7 +50,6 @@ jobs:
       - name: Remove docker container
         run: |
           docker rm -f ${{ env.CONTAINER_NAME }}-production
-            - name: Build and push
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
