@@ -31,7 +31,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          {{ range $section := .config.body }}
+          {{ range $section := .config.body.departments }}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   {{ $section.name }}
@@ -80,11 +80,6 @@
             <a class="nav-link active text-secondary" href="{{ .uri }}/#contacts">{{ if $lang.contacts }}{{ $lang.contacts }}{{ else }}Contacts{{ end }}
             </a>
           </li>
-          {{ if .config.cloud }}
-          <li class="nav-item">
-            <a class="nav-link active text-secondary" href="{{ .config.cloud }}" target="_blank">Cloud</a>
-          </li>
-          {{ end }}
           <li class="nav-item">
             <a class="nav-link active text-secondary" href="dataprotection">{{ if $lang.dataprotection }}{{ $lang.dataprotection }}{{ else }}Dataprotection{{ end }}</a>
           </li>
