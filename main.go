@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
+    "html/template"
 	"github.com/fsnotify/fsnotify"
 	"github.com/gin-gonic/gin"
 	"gopkg.in/yaml.v2"
@@ -78,14 +80,16 @@ func getConfig(path string) (map[string]interface{}){
 func main() {
 	configFilePath := "config.yaml"
 	configYAML := getConfig(configFilePath)
+	configYAMLBody := configYAML["body"]
+	configYAMLBodyBlog := configYAMLBody.(map[interface {}]interface {})["blog"]
+
+
 	langFile, _ := configYAML["lang_file"].(string)
 	var langYAML map[string]interface{}
 	if _, ok := configYAML["lang_file"].(string); ok {
 		langFilePath := "langs/"+langFile
 		langYAML = getConfig(langFilePath)
 	}
-
-
 
 	// Flags
 	var watchFlag bool
@@ -102,8 +106,6 @@ func main() {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	// End Flags
-
-
 
 
 	router := gin.Default()
@@ -128,12 +130,47 @@ func main() {
 				"config": configYAML,
 				"lang": langYAML,
 				"customPages" : customPages,
+				"blog": configYAMLBodyBlog,
 			})
 		})
 	}
 	// End Custom Pages Router
 
+	// Strapi Blog Page Router
+	if _, ok := configYAMLBodyBlog.(map[interface {}]interface {})["enabled"].(bool); !ok{
+		configYAMLBodyBlog.(map[interface {}]interface {})["enabled"] = false
+	}
+	if configYAMLBodyBlog.(map[interface {}]interface {})["enabled"].(bool) {
+		if _, ok := configYAMLBodyBlog.(map[interface {}]interface {})["name"].(string); !ok{
+			log.Fatal("\"Name\" not defined in blog")
+			os.Exit(1)
+		}
+		if _, ok := configYAMLBodyBlog.(map[interface {}]interface {})["url"].(string); !ok{
+			log.Fatal("\"url\" not defined in blog")		}
+		if _, ok := configYAMLBodyBlog.(map[interface {}]interface {})["strapi"].(bool); !ok{
+			configYAMLBodyBlog.(map[interface {}]interface {})["strapi"] = false
+		}
+		if configYAMLBodyBlog.(map[interface {}]interface {})["strapi"].(bool){
+			routePath := "/" + strings.ToLower(configYAMLBodyBlog.(map[interface {}]interface {})["name"].(string))
+			router.GET(routePath, func(c *gin.Context) {
+				c.HTML(http.StatusOK, "blog_page.html", gin.H{
+					"uri":    "http://" + c.Request.Host,
+					"config": configYAML,
+					"lang": langYAML,
+					"customPages" : customPages,
+					"blog": configYAMLBodyBlog,
+				})
+			})
+		}
+	}
+
+
+	// End Blog Page Router
+
 	// Index Router
+	router.SetFuncMap(template.FuncMap{
+        "toLower": strings.ToLower,
+    })
 	router.LoadHTMLGlob("templates/*")
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{
@@ -141,6 +178,7 @@ func main() {
 			"config": configYAML,
 			"lang": langYAML,
 			"customPages" : customPages,
+			"blog": configYAMLBodyBlog,
 		})
 	})
    // End Index Router
