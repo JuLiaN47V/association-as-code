@@ -83,6 +83,11 @@
           <li class="nav-item">
             <a class="nav-link active text-secondary" href="dataprotection">{{ if $lang.dataprotection }}{{ $lang.dataprotection }}{{ else }}Dataprotection{{ end }}</a>
           </li>
+          {{ if .blog.enabled }}
+          <li class="nav-item">
+            <a class="nav-link active text-secondary" href="{{ if .blog.strapi }}{{ .blog.name | toLower }}{{else}}{{ .blog.url }}{{end}}" target="_blank">{{ .blog.name }}</a>
+          </li>
+          {{ end }}
           {{ if .config.linked_sites }}
           {{ range $site := .config.linked_sites }}
           <li class="nav-item">
