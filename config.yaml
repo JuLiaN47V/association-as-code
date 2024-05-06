@@ -8,15 +8,20 @@ head:
     top: "Your"
     bottom: "Slogan"
 body:
-  - name: "Football"
-    contacts:
-      - name: "Don Joe"
-        title: "responsible"
-        description: "responsible for Example Sport"
-        tel: "555123456"
-    gallery: 
-      - title: "Example Image"
-        src: "example-image.webp"
+  blog:
+    url: http://blog.example.com/strapi
+    enabled: true
+    name: Article
+  departments:
+    - name: "Football"
+      contacts:
+        - name: "Don Joe"
+          title: "responsible"
+          description: "responsible for Example Sport"
+          tel: "555123456"
+      gallery: 
+        - title: "Example Image"
+          src: "example-image.webp"
 footer:
   background_image: "example-background.svg"
   socials:
@@ -45,8 +50,6 @@ lang_file: "en.yaml"
 linked_sites:
   - name: "Cloud"
     url: "https://cloud.example.com/"
-  - name: "Article"
-    url: "https://example.com/article"
 custom_pages:
   - name: "Dataprotection"
     file: "dataprotection.html"
