@@ -12,6 +12,7 @@ body:
     url: http://blog.example.com/strapi
     enabled: true
     name: Article
+    strapi: true
   departments:
     - name: "Football"
       contacts:

@@ -1,4 +1,4 @@
-module gin
+module aas
 
 go 1.22.1
 

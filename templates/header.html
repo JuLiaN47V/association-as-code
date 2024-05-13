@@ -1,22 +1,23 @@
 {{ $lang := .lang }}
+{{ $entry := . }}
 <div class="container-fluid">
   <div class="row d-lg-flex d-none bg-primary pt-2 pb-2">
       <div class="col d-flex justify-content-center">
-          <img src="static/img/{{ .config.head.logo }}" style="max-width: 10vw;">
+          <img src="static/img/{{ .config.Head.Logo }}" style="max-width: 10vw;">
       </div>
       <div class="col my-auto">
           <div class="row">
-              <h1 class="text-center text-secondary" style="font-family: {{ .config.head.slogan.font }};">{{ .config.head.slogan.top }}</h1>
+              <h1 class="text-center text-secondary" style="font-family: {{ .config.Head.Slogan.Font }};">{{ .config.Head.Slogan.Top }}</h1>
             </div>
           <div class="row">
-              <h1 class="text-center text-secondary">{{ .config.head.name }}</h1>
+              <h1 class="text-center text-secondary">{{ .config.Head.Name }}</h1>
             </div>
           <div class="row">
-              <h1 class="text-center text-secondary" style="font-family: {{ .config.head.slogan.font }};">{{ .config.head.slogan.bottom }}</h1>
+              <h1 class="text-center text-secondary" style="font-family: {{ .config.Head.Slogan.Font }};">{{ .config.Head.Slogan.Bottom }}</h1>
             </div>
       </div>
       <div class="col d-flex justify-content-center">
-              <img src="static/img/{{ .config.head.logo }}" style="max-width: 10vw;">
+              <img src="static/img/{{ .config.Head.Logo }}" style="max-width: 10vw;">
       </div>
   </div>
 </div>
@@ -25,80 +26,77 @@
     <div class="container-fluid">
       <a class="navbar-brand d-lg-flex d-none text-secondary" href="{{ .uri }}/">Home</a>
       <img class="d-lg-none" src="static/img/fclogo.svg" style="max-width: 10vw;">
-      <a class="navbar-brand d-lg-none text-secondary mx-auto" href="{{ .uri }}/" style="font-size: 5vw;">{{ .config.head.name }}</a>
+      <a class="navbar-brand d-lg-none text-secondary mx-auto" href="{{ .uri }}/" style="font-size: 5vw;">{{ .config.Head.Name }}</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          {{ range $section := .config.body.departments }}
+          {{ range $section := .config.Body.Departments }}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  {{ $section.name }}
+                  {{ $section.Name }}
                 </a>
                 <ul class="dropdown-menu">
-                  {{ if $section.contacts }}
-                  <li><a class="dropdown-item" href="{{ .uri }}/#{{ $section.name }}Contacts">{{ if $lang.contacts }}{{ $lang.contacts }}{{ else }}Contacts{{ end }}</a></li>
+                  {{ if $section.Contacts }}
+                  <li><a class="dropdown-item" href="{{ $entry.uri }}/#{{ $section.Name }}Contacts">{{ if $lang.Contacts }}{{ $lang.Contacts }}{{ else }}Contacts{{ end }}</a></li>
                   {{ end }}
-                  {{ if $section.gallery }}
-                  <li><a class="dropdown-item" href="{{ .uri }}/#{{ $section.name }}Gallery">{{ if $lang.gallery}}{{ $lang.gallery }}{{ else }}Gallery{{ end }}</a></li>
+                  {{ if $section.Gallery }}
+                  <li><a class="dropdown-item" href="{{ $entry.uri }}/#{{ $section.Name }}Gallery">{{ if $lang.Gallery}}{{ $lang.Gallery }}{{ else }}Gallery{{ end }}</a></li>
                   {{ end }}
                 </ul>
               </li>
           {{ end }}
 
-          {{ if .config.calendars }}
+          {{ if .config.Calendars }}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  {{ if $lang.calendars }}{{ $lang.calendars }}{{ else }}Calendars{{ end }}
+                  {{ if $lang.Calendars }}{{ $lang.Calendars }}{{ else }}Calendars{{ end }}
                 </a>
                 <ul class="dropdown-menu">
-                  {{ range $calendar := .config.calendars }}
-                  <li><a class="dropdown-item" href="{{ $calendar.url }}" target="_blank">{{ $calendar.name }}</a></li>
+                  {{ range $calendar := .config.Calendars }}
+                  <li><a class="dropdown-item" href="{{ $calendar.URL }}" target="_blank">{{ $calendar.Name }}</a></li>
                   {{ end }}
                 </ul>
               </li>
           {{ end }}
-          {{ if .config.files }}
+          {{ if .config.Files }}
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {{ if $lang.files }}{{ $lang.files }}{{ else }}Files{{ end }}
+                {{ if $lang.Files }}{{ $lang.Files }}{{ else }}Files{{ end }}
               </a>
               <ul class="dropdown-menu">
-                {{ range $file := .config.files }}
-                <li><a class="dropdown-item" href="{{ $file.url }}" target="_blank">{{ $file.name }}</a></li>
+                {{ range $file := .config.Files }}
+                <li><a class="dropdown-item" href="{{ $file.URL }}" target="_blank">{{ $file.Name }}</a></li>
                 {{ end }}
               </ul>
             </li>
           {{ end }}
-          {{ if .config.footer.socials }}
+          {{ if .config.Footer.Socials }}
           <li class="nav-item">
-            <a class="nav-link active text-secondary" aria-current="page" href="{{ .uri }}/#social">Social</a>
+            <a class="nav-link active text-secondary" aria-current="page" href="{{ $entry.uri }}/#social">Social</a>
           </li>
           {{ end }}
           <li class="nav-item">
-            <a class="nav-link active text-secondary" href="{{ .uri }}/#contacts">{{ if $lang.contacts }}{{ $lang.contacts }}{{ else }}Contacts{{ end }}
+            <a class="nav-link active text-secondary" href="{{ $entry.uri }}/#contacts">{{ if $lang.Contacts }}{{ $lang.Contacts }}{{ else }}Contacts{{ end }}
             </a>
           </li>
+          {{ if .config.Body.Blog.Enabled }}
           <li class="nav-item">
-            <a class="nav-link active text-secondary" href="dataprotection">{{ if $lang.dataprotection }}{{ $lang.dataprotection }}{{ else }}Dataprotection{{ end }}</a>
-          </li>
-          {{ if .blog.enabled }}
-          <li class="nav-item">
-            <a class="nav-link active text-secondary" href="{{ if .blog.strapi }}{{ .blog.name | toLower }}{{else}}{{ .blog.url }}{{end}}" target="_blank">{{ .blog.name }}</a>
+            <a class="nav-link active text-secondary" href="{{ if .config.Body.Blog.Strapi }}{{ .config.Body.Blog.Name }}{{else}}{{ .config.Body.Blog.URL }}{{end}}" target="_blank">{{ .config.Body.Blog.Name }}</a>
           </li>
           {{ end }}
-          {{ if .config.linked_sites }}
-          {{ range $site := .config.linked_sites }}
+          {{ if .config.LinkedSites }}
+          {{ range $site := .config.LinkedSites }}
           <li class="nav-item">
-            <a class="nav-link active text-secondary" href="{{ $site.url }}" target="_blank">{{ $site.name }}</a>
+            <a class="nav-link active text-secondary" href="{{ $site.URL }}" target="_blank">{{ $site.Name }}</a>
           </li>
           {{ end }}
           {{ end }}
           {{ if .customPages }}
           {{ range $customPage := .customPages }}
           <li class="nav-item">
-            <a class="nav-link active text-secondary" href="{{ $customPage.name }}">{{ $customPage.name }}</a>
+            <a class="nav-link active text-secondary" href="{{ $customPage.Name }}">{{ $customPage.Name }}</a>
           </li>
           {{ end }}
           {{ end }}
