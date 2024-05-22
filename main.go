@@ -1,14 +1,15 @@
 package main
 
 import (
-	"flag"
-	"net/http"
 	"aas/config"
-	"github.com/gin-gonic/gin"
+	"flag"
 	"html/template"
 	"log"
+	"net/http"
 	"os"
 	"strings"
+	"fmt"
+	"github.com/gin-gonic/gin"
 )
 
 func toLower(input string) string {
@@ -18,6 +19,7 @@ func toLower(input string) string {
 
 
 func main() {
+	
 	configFilePath := "config.yaml"
 	configStruct := config.ReadConfig(configFilePath)
 	println(&configStruct)	
@@ -44,6 +46,8 @@ func main() {
 
 
 	router := gin.Default()
+	router.LoadHTMLGlob("templates/**/*")
+
 
 	// Static Router
 	router.Static("/static", "static")
@@ -63,23 +67,18 @@ func main() {
 	// End Custom Pages Router
 
 	//Strapi Blog Page Router
-	if configStruct.Body.Blog.Enabled != true {
-		configStruct.Body.Blog.Enabled = false
-	}
-	if configStruct.Body.Blog.Enabled {
-		if configStruct.Body.Blog.Name == "" {
-			log.Fatal("\"Name\" not defined in blog")
+	fmt.Println("url: " + configStruct.Body.Strapi.URL)
+	fmt.Println("name: " + configStruct.Body.Strapi.Name)
+	if (configStruct.Body.Strapi.Name != "" || configStruct.Body.Strapi.URL != "") || (configStruct.Body.Strapi.Name != "" && configStruct.Body.Strapi.URL != ""){
+		if configStruct.Body.Strapi.Name == ""{
+			log.Fatal("\"name\" not defined in strapi")		
 			os.Exit(1)
-		}
-		if configStruct.Body.Blog.URL == ""{
-			log.Fatal("\"url\" not defined in blog")		}
-		if configStruct.Body.Blog.Strapi != true {
-			configStruct.Body.Blog.Strapi = false
-		}
-		if configStruct.Body.Blog.Strapi{
-			routePath := "/" + configStruct.Body.Blog.Name
-			router.GET(routePath, func(c *gin.Context) {
-				c.HTML(http.StatusOK, "blog_page.html", gin.H{
+		} else if configStruct.Body.Strapi.URL == ""{
+			log.Fatal("\"url\" not defined in strapi")		
+			os.Exit(1)
+		} else {
+			router.GET(configStruct.Body.Strapi.Name, func(c *gin.Context) {
+				c.HTML(http.StatusOK, "strapi.html", gin.H{
 					"uri":    "http://" + c.Request.Host,
 					"config": configStruct,
 					"lang": languageStruct,
@@ -88,6 +87,7 @@ func main() {
 			})
 		}
 	}
+	
 
 	// End Blog Page Router
 
@@ -95,7 +95,6 @@ func main() {
 	router.SetFuncMap(template.FuncMap{
         "toLower": toLower,
     })
-	router.LoadHTMLGlob("templates/**/*")
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{
 			"uri":    "http://" + c.Request.Host,
