@@ -21,12 +21,10 @@ type Config struct {
 		} `yaml:"slogan"`
 	} `yaml:"head"`
 	Body struct {
-		Blog struct {
+		Strapi struct {
 			URL     string `yaml:"url"`
-			Enabled bool   `yaml:"enabled"`
-			Strapi bool   `yaml:"strapi"`
 			Name    string `yaml:"name"`
-		} `yaml:"blog"`
+		} `yaml:"strapi"`
 		Departments []struct {
 			Name     string `yaml:"name"`
 			Contacts []struct {
