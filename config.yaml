@@ -8,11 +8,9 @@ head:
     top: "Your"
     bottom: "Slogan"
 body:
-  blog:
-    url: http://blog.example.com/strapi
-    enabled: true
-    name: Article
-    strapi: true
+  strapi:
+    url: "https://strapi.example.com"
+    name: "Article"
   departments:
     - name: "Football"
       contacts:
