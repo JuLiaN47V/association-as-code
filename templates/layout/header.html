@@ -81,9 +81,9 @@
             <a class="nav-link active text-secondary" href="{{ $entry.uri }}/#contacts">{{ if $lang.Contacts }}{{ $lang.Contacts }}{{ else }}Contacts{{ end }}
             </a>
           </li>
-          {{ if .config.Body.Blog.Enabled }}
+          {{ if not (eq .config.Body.Strapi.Name "") }}
           <li class="nav-item">
-            <a class="nav-link active text-secondary" href="{{ if .config.Body.Blog.Strapi }}{{ .config.Body.Blog.Name }}{{else}}{{ .config.Body.Blog.URL }}{{end}}" target="_blank">{{ .config.Body.Blog.Name }}</a>
+            <a class="nav-link active text-secondary" href="{{ .config.Body.Strapi.Name }}" target="_blank">{{ .config.Body.Strapi.Name }}</a>
           </li>
           {{ end }}
           {{ if .config.LinkedSites }}
