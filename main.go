@@ -95,7 +95,7 @@ func main() {
 	router.SetFuncMap(template.FuncMap{
         "toLower": toLower,
     })
-	router.LoadHTMLGlob("templates/*")
+	router.LoadHTMLGlob("templates/**/*")
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{
 			"uri":    "http://" + c.Request.Host,
