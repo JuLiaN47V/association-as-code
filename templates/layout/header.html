@@ -1,0 +1,106 @@
+{{ $lang := .lang }}
+{{ $entry := . }}
+<div class="container-fluid">
+  <div class="row d-lg-flex d-none bg-primary pt-2 pb-2">
+      <div class="col d-flex justify-content-center">
+          <img src="static/img/{{ .config.Head.Logo }}" style="max-width: 10vw;">
+      </div>
+      <div class="col my-auto">
+          <div class="row">
+              <h1 class="text-center text-secondary" style="font-family: {{ .config.Head.Slogan.Font }};">{{ .config.Head.Slogan.Top }}</h1>
+            </div>
+          <div class="row">
+              <h1 class="text-center text-secondary">{{ .config.Head.Name }}</h1>
+            </div>
+          <div class="row">
+              <h1 class="text-center text-secondary" style="font-family: {{ .config.Head.Slogan.Font }};">{{ .config.Head.Slogan.Bottom }}</h1>
+            </div>
+      </div>
+      <div class="col d-flex justify-content-center">
+              <img src="static/img/{{ .config.Head.Logo }}" style="max-width: 10vw;">
+      </div>
+  </div>
+</div>
+
+  <nav class="navbar navbar-expand-lg bg-primary sticky-top" style="width: 100%">
+    <div class="container-fluid">
+      <a class="navbar-brand d-lg-flex d-none text-secondary" href="{{ .uri }}/">Home</a>
+      <img class="d-lg-none" src="static/img/fclogo.svg" style="max-width: 10vw;">
+      <a class="navbar-brand d-lg-none text-secondary mx-auto" href="{{ .uri }}/" style="font-size: 5vw;">{{ .config.Head.Name }}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          {{ range $section := .config.Body.Departments }}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ $section.Name }}
+                </a>
+                <ul class="dropdown-menu">
+                  {{ if $section.Contacts }}
+                  <li><a class="dropdown-item" href="{{ $entry.uri }}/#{{ $section.Name }}Contacts">{{ if $lang.Contacts }}{{ $lang.Contacts }}{{ else }}Contacts{{ end }}</a></li>
+                  {{ end }}
+                  {{ if $section.Gallery }}
+                  <li><a class="dropdown-item" href="{{ $entry.uri }}/#{{ $section.Name }}Gallery">{{ if $lang.Gallery}}{{ $lang.Gallery }}{{ else }}Gallery{{ end }}</a></li>
+                  {{ end }}
+                </ul>
+              </li>
+          {{ end }}
+
+          {{ if .config.Calendars }}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ if $lang.Calendars }}{{ $lang.Calendars }}{{ else }}Calendars{{ end }}
+                </a>
+                <ul class="dropdown-menu">
+                  {{ range $calendar := .config.Calendars }}
+                  <li><a class="dropdown-item" href="{{ $calendar.URL }}" target="_blank">{{ $calendar.Name }}</a></li>
+                  {{ end }}
+                </ul>
+              </li>
+          {{ end }}
+          {{ if .config.Files }}
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ if $lang.Files }}{{ $lang.Files }}{{ else }}Files{{ end }}
+              </a>
+              <ul class="dropdown-menu">
+                {{ range $file := .config.Files }}
+                <li><a class="dropdown-item" href="{{ $file.URL }}" target="_blank">{{ $file.Name }}</a></li>
+                {{ end }}
+              </ul>
+            </li>
+          {{ end }}
+          {{ if .config.Footer.Socials }}
+          <li class="nav-item">
+            <a class="nav-link active text-secondary" aria-current="page" href="{{ $entry.uri }}/#social">Social</a>
+          </li>
+          {{ end }}
+          <li class="nav-item">
+            <a class="nav-link active text-secondary" href="{{ $entry.uri }}/#contacts">{{ if $lang.Contacts }}{{ $lang.Contacts }}{{ else }}Contacts{{ end }}
+            </a>
+          </li>
+          {{ if not (eq .config.Body.Strapi.Name "") }}
+          <li class="nav-item">
+            <a class="nav-link active text-secondary" href="{{ .config.Body.Strapi.Name }}" target="_blank">{{ .config.Body.Strapi.Name }}</a>
+          </li>
+          {{ end }}
+          {{ if .config.LinkedSites }}
+          {{ range $site := .config.LinkedSites }}
+          <li class="nav-item">
+            <a class="nav-link active text-secondary" href="{{ $site.URL }}" target="_blank">{{ $site.Name }}</a>
+          </li>
+          {{ end }}
+          {{ end }}
+          {{ if .customPages }}
+          {{ range $customPage := .customPages }}
+          <li class="nav-item">
+            <a class="nav-link active text-secondary" href="{{ $customPage.Name }}">{{ $customPage.Name }}</a>
+          </li>
+          {{ end }}
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+  </nav>

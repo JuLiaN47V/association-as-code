@@ -1,90 +1,28 @@
 package main
 
 import (
+	"aas/config"
 	"flag"
-	"fmt"
-	"log"
+	"html/template"
 	"net/http"
-	"os"
-	"github.com/fsnotify/fsnotify"
+	"strings"
 	"github.com/gin-gonic/gin"
-	"gopkg.in/yaml.v2"
 )
 
-
-func watchConfig(configYAML *map[string]interface{}, configFilePath *string){
-	watcher, err := fsnotify.NewWatcher()
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer watcher.Close()
-	go func() {
-        for {
-            select {
-            case event, ok := <-watcher.Events:
-                if !ok {
-                    return
-                }
-                if event.Has(fsnotify.Write) {
-					yamlFile, err := os.ReadFile(*configFilePath)
-					if err != nil {
-						fmt.Printf("yamlFile.Get err #%v ", err)
-					}
-					err = yaml.Unmarshal(yamlFile, &configYAML)
-					if err != nil {
-						fmt.Printf("Unmarshal: %v", err)
-					}
-                }
-            case err, ok := <-watcher.Errors:
-                if !ok {
-                    return
-                }
-                log.Println("error:", err)
-            }
-        }
-    }()
-	    // Add a path.
-		err = watcher.Add("config.yaml")
-		if err != nil {
-			log.Fatal(err)
-		}
-	
-		// Block main goroutine forever.
-		<-make(chan struct{})
+func toLower(input string) string {
+    return strings.ToLower(input)
 }
 
-func getConfig(path string) (map[string]interface{}){
-
-
-	configYAML := make(map[string]interface{})
-
-	yamlFile, err := os.ReadFile(path)
-	if err != nil {
-		fmt.Printf("yamlFile.Get err #%v ", err)
-		os.Exit(1)
-	}
-	err = yaml.Unmarshal(yamlFile, configYAML)
-	if err != nil {
-		fmt.Printf("Unmarshal: %v", err)
-		os.Exit(1)
-	}
-
-	
-	
-	return configYAML
-}
 
 
 func main() {
+	
 	configFilePath := "config.yaml"
-	configYAML := getConfig(configFilePath)
-	langFile, _ := configYAML["lang_file"].(string)
-	var langYAML map[string]interface{}
-	if _, ok := configYAML["lang_file"].(string); ok {
-		langFilePath := "langs/"+langFile
-		langYAML = getConfig(langFilePath)
-	}
-
+	configStruct := config.ReadConfig(configFilePath)
+	println(&configStruct)	
+	languageStruct := config.ReadLanguage("langs/"+configStruct.LangFile)
+	println(&languageStruct.Calendars)	
+	println(configStruct.CustomPages[0].Name)
 
 
 	// Flags
@@ -95,7 +33,7 @@ func main() {
 	flag.Parse()
 
 	if watchFlag{
-		go watchConfig(&configYAML, &configFilePath)
+		go config.Watch(configStruct, &configFilePath)
 	}
 
 	if !debugFlag {
@@ -104,43 +42,37 @@ func main() {
 	// End Flags
 
 
-
-
 	router := gin.Default()
+	router.LoadHTMLGlob("templates/**/*")
+
 
 	// Static Router
 	router.Static("/static", "static")
 	// End Static Router
 
 	// Custom Pages Router
-	customPages := configYAML["custom_pages"].([]interface {})
-	mapString := make(map[string]string)
-	for _, value := range customPages {
-		for key, test := range value.(map[interface {}]interface {}){
-			strKey := fmt.Sprintf("%v", key)
-			strValue := fmt.Sprintf("%v", test)
-			mapString[strKey] = strValue
-		}
-		routePath := "/" + mapString["name"]
-		router.GET(routePath, func(c *gin.Context) {
-			c.HTML(http.StatusOK, mapString["file"], gin.H{
+	for _, customPage := range configStruct.CustomPages{
+		router.GET(customPage.Name, func(c *gin.Context) {
+			c.HTML(http.StatusOK, customPage.File, gin.H{
 				"uri":    "http://" + c.Request.Host,
-				"config": configYAML,
-				"lang": langYAML,
-				"customPages" : customPages,
+				"config": configStruct,
+				"lang": languageStruct,
+				"customPages" : configStruct.CustomPages,
 			})
 		})
 	}
 	// End Custom Pages Router
 
 	// Index Router
-	router.LoadHTMLGlob("templates/*")
+	router.SetFuncMap(template.FuncMap{
+        "toLower": toLower,
+    })
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{
 			"uri":    "http://" + c.Request.Host,
-			"config": configYAML,
-			"lang": langYAML,
-			"customPages" : customPages,
+			"config": configStruct,
+			"lang": languageStruct,
+			"customPages" : configStruct.CustomPages,
 		})
 	})
    // End Index Router
