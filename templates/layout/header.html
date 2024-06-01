@@ -47,31 +47,6 @@
                 </ul>
               </li>
           {{ end }}
-
-          {{ if .config.Calendars }}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  {{ if $lang.Calendars }}{{ $lang.Calendars }}{{ else }}Calendars{{ end }}
-                </a>
-                <ul class="dropdown-menu">
-                  {{ range $calendar := .config.Calendars }}
-                  <li><a class="dropdown-item" href="{{ $calendar.URL }}" target="_blank">{{ $calendar.Name }}</a></li>
-                  {{ end }}
-                </ul>
-              </li>
-          {{ end }}
-          {{ if .config.Files }}
-          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {{ if $lang.Files }}{{ $lang.Files }}{{ else }}Files{{ end }}
-              </a>
-              <ul class="dropdown-menu">
-                {{ range $file := .config.Files }}
-                <li><a class="dropdown-item" href="{{ $file.URL }}" target="_blank">{{ $file.Name }}</a></li>
-                {{ end }}
-              </ul>
-            </li>
-          {{ end }}
           {{ if .config.Footer.Socials }}
           <li class="nav-item">
             <a class="nav-link active text-secondary" aria-current="page" href="{{ $entry.uri }}/#social">Social</a>
@@ -86,17 +61,28 @@
             <a class="nav-link active text-secondary" href="{{ .config.Body.Strapi.Name }}" target="_blank">{{ .config.Body.Strapi.Name }}</a>
           </li>
           {{ end }}
-          {{ if .config.LinkedSites }}
-          {{ range $site := .config.LinkedSites }}
-          <li class="nav-item">
-            <a class="nav-link active text-secondary" href="{{ $site.URL }}" target="_blank">{{ $site.Name }}</a>
-          </li>
-          {{ end }}
-          {{ end }}
           {{ if .customPages }}
           {{ range $customPage := .customPages }}
           <li class="nav-item">
             <a class="nav-link active text-secondary" href="{{ $customPage.Name }}">{{ $customPage.Name }}</a>
+          </li>
+          {{ end }}
+          {{ end }}
+          {{ range $site := .config.LinkedSites }}
+          {{ if eq $site.Type "dropdown" }}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ $site.Name }}
+            </a>
+            <ul class="dropdown-menu">
+              {{ range $link := $site.Links }}
+              <li><a class="dropdown-item" href="{{ $link.URL }}" target="_blank">{{ $link.Name }}</a></li>
+              {{ end }}
+            </ul>
+          </li>
+          {{ else if eq $site.Type "link" }}
+          <li class="nav-item">
+            <a class="nav-link active text-secondary" aria-current="page" target="_blank" href="{{ $site.URL }}">{{ $site.Name }}</a>
           </li>
           {{ end }}
           {{ end }}
