@@ -8,9 +8,6 @@ head:
     top: "Your"
     bottom: "Slogan"
 body:
-  strapi:
-    url: "https://strapi.example.com"
-    name: "Article"
   departments:
     - name: "Football"
       contacts:
