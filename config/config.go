@@ -62,18 +62,15 @@ type Config struct {
 		FontWeight string `yaml:"font_weight"`
 		FontStyle  string `yaml:"font_style"`
 	} `yaml:"fonts"`
-	Calendars []struct {
-		Name string `yaml:"name"`
-		URL  string `yaml:"url"`
-	} `yaml:"calendars"`
-	Files []struct {
-		Name string `yaml:"name"`
-		URL  string `yaml:"url"`
-	} `yaml:"files"`
 	LangFile    string `yaml:"lang_file"`
 	LinkedSites []struct {
-		Name string `yaml:"name"`
-		URL  string `yaml:"url"`
+		Name  string `yaml:"name"`
+		URL   string `yaml:"url,omitempty"`
+		Type  string `yaml:"type"`
+		Links []struct {
+			Name string `yaml:"name"`
+			URL  string `yaml:"url"`
+		} `yaml:"links,omitempty"`
 	} `yaml:"linked_sites"`
 	CustomPages []struct {
 		Name string `yaml:"name"`
