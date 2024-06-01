@@ -1,4 +1,4 @@
-name: Docker Image Merge
+name: Test Docker Image Build on Main Merge
 
 on:
   push:
