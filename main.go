@@ -4,11 +4,8 @@ import (
 	"aas/config"
 	"flag"
 	"html/template"
-	"log"
 	"net/http"
-	"os"
 	"strings"
-	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -65,31 +62,6 @@ func main() {
 		})
 	}
 	// End Custom Pages Router
-
-	//Strapi Blog Page Router
-	fmt.Println("url: " + configStruct.Body.Strapi.URL)
-	fmt.Println("name: " + configStruct.Body.Strapi.Name)
-	if (configStruct.Body.Strapi.Name != "" || configStruct.Body.Strapi.URL != "") || (configStruct.Body.Strapi.Name != "" && configStruct.Body.Strapi.URL != ""){
-		if configStruct.Body.Strapi.Name == ""{
-			log.Fatal("\"name\" not defined in strapi")		
-			os.Exit(1)
-		} else if configStruct.Body.Strapi.URL == ""{
-			log.Fatal("\"url\" not defined in strapi")		
-			os.Exit(1)
-		} else {
-			router.GET(configStruct.Body.Strapi.Name, func(c *gin.Context) {
-				c.HTML(http.StatusOK, "strapi.html", gin.H{
-					"uri":    "http://" + c.Request.Host,
-					"config": configStruct,
-					"lang": languageStruct,
-					"customPages" : configStruct.CustomPages,
-				})
-			})
-		}
-	}
-	
-
-	// End Blog Page Router
 
 	// Index Router
 	router.SetFuncMap(template.FuncMap{
