@@ -19,10 +19,7 @@ func main() {
 	
 	configFilePath := "config.yaml"
 	configStruct := config.ReadConfig(configFilePath)
-	println(&configStruct)	
 	languageStruct := config.ReadLanguage("langs/"+configStruct.LangFile)
-	println(&languageStruct.Calendars)	
-	println(configStruct.CustomPages[0].Name)
 
 
 	// Flags

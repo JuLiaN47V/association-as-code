@@ -1,6 +1,7 @@
 FROM golang:1.22.2-alpine3.18 AS build
 WORKDIR /src
 COPY main.go go.mod go.sum .
+COPY config config
 RUN go mod download
 RUN go mod tidy
 RUN go build -o /app/webserver ./main.go
