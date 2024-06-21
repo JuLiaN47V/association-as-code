@@ -1,4 +1,8 @@
 ## Association As Code
+<p align="center">
+    <img src="aac_logo.png" width="150" >
+</p>
+
 This project is designed for associations in order to run a templated webserver.  
 The Goal is to make it easy to run a simple, customizeable website.  
 Licensed under [Apache 2.0](https://github.com/JuLiaN47V/association-as-code/blob/main/LICENSE.md)
@@ -10,7 +14,7 @@ You can either run the webserver within docker or directly from source.
 
 To run the pre-defined example webserver, run:
 ``` docker
-docker run -d -p 8090:8090 julian47/association-as-code:webserver
+docker run -d -p 8090:8090 julian47/association-as-code:latest
 ```
 
 For customization, you can add you own config-file, language-file and customized bootstap.  
