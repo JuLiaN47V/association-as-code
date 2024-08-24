@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"net/http"
 	"strings"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -42,6 +43,39 @@ func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/**/*")
 
+
+	// Start Config Parsing
+	for department_iteration, department := range configStruct.Body.Departments{
+		for widget_iteration, widget := range department.BFVWidgets{
+			switch toLower(widget.Type) {
+			case "compoundtable":
+				continue
+			case "teamfull":
+				continue
+			case "teamsmall":
+				continue
+			case "clubgames":
+				continue
+			case "clubvideo":
+				continue
+			case "compoundvideo":
+				continue
+			case "teamliveticker":
+				continue
+			case "compound":
+				continue
+			case "cup":
+				continue
+			case "gamereport":
+				continue
+			default:
+				configStruct.Body.Departments[department_iteration].BFVWidgets[widget_iteration].Type = "invalid"
+			}
+		}
+	}
+
+
+	// End Config Parsing
 
 	// Static Router
 	router.Static("/static", "static")
