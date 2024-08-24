@@ -1,0 +1,314 @@
+
+
+var BFVWidget = BFVWidget || {};
+BFVWidget.HTML5 = {
+		bfvHost : window.location.protocol + '//'+'widget-prod.bfv.de',
+		appPath : '/widget/widgetresource/iframe' + ('https:' == document.location.protocol ? '/ssl' : '' ) + '?url=' + window.location.hostname,
+		/****************************************
+		 * Selectable tabs of the vereins-widget.
+		 ****************************************/
+
+		vereinTabs : {
+			spiele : 'all',
+			heimspiele : 'home',
+			manschaften : 'team'
+		},
+		/****************************************
+		 * Selectable tabs of the competition-widget.
+		 ****************************************/
+		wettbewerbTabs : {
+			ergebnisse : 'results',
+			tabelle : 'tables/tabletable',
+			torschuetzen : 'scorer'
+		},
+		/****************************************
+		 * Selectable tabs of the team-widget.
+		 ****************************************/
+		mannschaftTabs : {
+			spiele : 'teammatches',
+			kader : 'kader',
+			wettbewerbErgebnisse : 'select/competitionResults',
+			wettbewerbTabelle : 'select/competitionTable',
+			wettbewerbTorschuetzen : 'select/competitionScorer',
+			liveticker : 'select/liveticker'
+		},
+		/****************************************
+		 * Creates an iFrame object end returns it.
+		 ****************************************/
+		createIFrame : function(height, width){
+			var iFrame = document.createElement('iframe');
+
+			if (typeof iFrame.setAttribute == 'function') {
+				iFrame.setAttribute('width', width || '380');
+				iFrame.setAttribute('height', height || '500');
+				iFrame.setAttribute('allowFullScreen', 'true');
+				iFrame.setAttribute('style', 'margin:0 auto;');
+				iFrame.style.border = 'none';
+			}
+
+			return iFrame;
+		},
+		/****************************************
+		 * Returns the dom-element with the given id
+		 ****************************************/
+		getTargetDiv : function(targetDivId){
+			if(!targetDivId){
+				alert('Ziel DIV Element muss angegeben werden!');
+				throw 'No div element given!';
+			}
+			var targetDiv = document.getElementById(targetDivId);
+			if(!targetDiv){
+				throw 'Could not get element for id \'' + targetDivId + '\'';
+			}
+			targetDiv.innerHTML = '';
+			return targetDiv;
+		},
+		/****************************************
+		 * Returns the path to the app resource.
+		 * widgetPath - not null
+		 ****************************************/
+		getIFrameSrc : function(widgetPath){
+			var iFrameSrc =  BFVWidget.HTML5.bfvHost + BFVWidget.HTML5.appPath + '&widget=' + encodeURIComponent(widgetPath
+				 + '&referrer=' + window.location.hostname);
+
+			return iFrameSrc;
+		},
+		/***************************************
+		 * Creates the competition-table-widget.
+		 * compoundId - not null
+		 * targetDivId - not null - must be a valid id of an div-element
+		 * options - optional
+		 * 		height - the widget height
+		 * 		width - the widget with
+		 *		teamPermanentId - the team to highlight
+		 ***************************************/
+		zeigeWettbewerbsTabelle : function(compoundId, targetDivId, options){
+			options = options || {};
+			if(!compoundId){
+				alert('Die ID des Wettbewerbs muss angegeben werden');
+				return;
+			}
+			var iFrame = BFVWidget.HTML5.createIFrame(options.height , options.width);
+			iFrame.src = BFVWidget.HTML5.getIFrameSrc('widget/competition/table/compound' + compoundId + (options.teamPermanentId ? '/tpid' + options.teamPermanentId : '')  + '?css=' + encodeURIComponent(JSON.stringify(options)));
+			BFVWidget.HTML5.getTargetDiv(targetDivId).appendChild(iFrame);
+		},
+
+		/***************************************
+		 * Creates the team-widget.
+		 * teamId - not null
+		 * targetDivId - not null - must be a valid id of an div-element
+		 * options - optional
+		 * 		height - the widget height
+		 * 		width - the widget with
+		 * 		seletedTab - the tab to be selected (see BFVWidget.HTML5.mannschaftTabs)
+		 ***************************************/
+		zeigeMannschaftKomplett : function(teamId, targetDivId, options){
+			options = options || {};
+			if(!teamId){
+				alert('Die ID des Teams muss angegeben werden');
+				return;
+			}
+			var iFrame = BFVWidget.HTML5.createIFrame(options.height, options.width);
+			iFrame.src = BFVWidget.HTML5.getIFrameSrc('widget/team/complete/team' + teamId + (options.selectedTab ? '/' + options.selectedTab : '') + '?css=' + encodeURIComponent(JSON.stringify(options)));
+			BFVWidget.HTML5.getTargetDiv(targetDivId).appendChild(iFrame);
+		},
+
+
+		zeigeMannschaftMini : function(teamId, targetDivId, options){
+			options = options || {};
+			if(!teamId){
+				alert('Die ID des Teams muss angegeben werden');
+				return;
+			}
+			var iFrame = BFVWidget.HTML5.createIFrame(options.height , options.width);
+			iFrame.src = BFVWidget.HTML5.getIFrameSrc('widget/team/mini/team' + teamId + '?css=' + encodeURIComponent(JSON.stringify(options)));
+			BFVWidget.HTML5.getTargetDiv(targetDivId).appendChild(iFrame);
+		},
+
+		/***************************************
+		 * Creates the club-widget.
+		 * clubId - not null
+		 * targetDivId - not null - must be a valid id of an div-element
+		 * options - optional
+		 * 		height - the widget height
+		 * 		width - the widget with
+		 ***************************************/
+		zeigeVereinSpiele: function(clubId, targetDivId, options){
+			options = options || {};
+			if(!clubId){
+				alert('Die ID des Vereins muss angegeben werden');
+				return;
+			}
+			var iFrame = BFVWidget.HTML5.createIFrame(options.height , options.width);
+			iFrame.src = BFVWidget.HTML5.getIFrameSrc('widget/club/matches/club' + clubId + (options.selectedTab ? '/' + options.selectedTab : '') + '?css=' + encodeURIComponent(JSON.stringify(options)));
+			BFVWidget.HTML5.getTargetDiv(targetDivId).appendChild(iFrame);
+		},
+
+		/***************************************
+		 * Creates the club-video-widget.
+		 * clubId - not null
+		 * targetDivId - not null - must be a valid id of an div-element
+		 * options - optional
+		 * 		height - the widget height
+		 * 		width - the widget with
+		 * 		showVideoWithClubContext - if a club video should be viewed or the first video of the channels
+		 *      channelIds - the channels for the list of additional videos
+		 ***************************************/
+		zeigeVereinsVideo : function(clubId, targetDivId, options){
+			options = options || {};
+			if(!clubId){
+				alert('Die ID des Vereins muss angegeben werden');
+				return;
+			}
+			var iFrame = BFVWidget.HTML5.createIFrame(options.height , options.width);
+			iFrame.scrolling = 'no';
+			var url = 'widget/mi24/videos/club' + clubId;
+			if (options.videoCount) {
+				url += '/videoCount' + options.videoCount;
+			}else{
+				url += '/videoCount0'
+			}
+			if (options.channelIds) {
+				url += '/channelIds' + options.channelIds;
+				if (options.showVideoWithClubContext) {
+					url += '/showVideoWithClubContext' + options.showVideoWithClubContext;
+				}else{
+					url += '/showVideoWithClubContextfalse'
+				}
+				if (options.showAlternative) {
+					url += '/showAlternative' + options.showAlternative;
+				}else{
+					url += '/showAlternativefalse'
+				}
+			}
+			iFrame.src = BFVWidget.HTML5.getIFrameSrc(url  + '?css=' + encodeURIComponent(JSON.stringify(options)));
+			BFVWidget.HTML5.getTargetDiv(targetDivId).appendChild(iFrame);
+		},
+
+		/***************************************
+		 * Creates the liga-video-widget.
+		 * clubId - not null
+		 * targetDivId - not null - must be a valid id of an div-element
+		 * options - optional
+		 * 		height - the widget height
+		 * 		width - the widget with
+		 * 		showVideoWithClubContext - if a club video should be viewed or the first video of the channels
+		 *      channelIds - the channels for the list of additional videos
+		 ***************************************/
+		zeigeLigaVideo : function(compoundId, targetDivId, options){
+			options = options || {};
+
+			if(!compoundId){
+				alert('Die compoundId muss angegeben werden');
+				return;
+			}
+			var iFrame = BFVWidget.HTML5.createIFrame(options.height , options.width);
+			iFrame.scrolling = 'no';
+			var url = 'widget/mi24/videos/compound' + compoundId;
+			if (options.videoCount) {
+				url += '/videoCount' + options.videoCount;
+			}else{
+				url += '/videoCount0'
+			}
+
+			if (options.channelIds) {
+				url += '/channelIds' + options.channelIds;
+				if (options.showVideoWithLeagueContext) {
+					url += '/showVideoWithLeagueContext' + options.showVideoWithLeagueContext;
+				}else{
+					url += '/showVideoWithLeagueContextfalse'
+				}
+				if (options.showAlternative) {
+					url += '/showAlternative' + options.showAlternative;
+				}else{
+					url += '/showAlternativefalse'
+				}
+			}
+			iFrame.src = BFVWidget.HTML5.getIFrameSrc(url  + '?css=' + encodeURIComponent(JSON.stringify(options)));
+			BFVWidget.HTML5.getTargetDiv(targetDivId).appendChild(iFrame);
+		},
+
+		/***************************************
+		 * Creates the team-liveticker-widget.
+		 * clubId - not null
+		 * teamPermanentId - not null
+		 * targetDivId - not null - must be a valid id of an div-element
+		 * options - optional
+		 * 		height - the widget height
+		 * 		width - the widget with
+		 ***************************************/
+		zeigeMannschaftsLiveticker : function(clubId, teamPermanentId, targetDivId, options){
+			options = options || {};
+			if(!clubId){
+				alert('Die ID des Vereins muss angegeben werden');
+				return;
+			}
+			if(!teamPermanentId){
+				alert('Die ID des Teams muss angegeben werden');
+				return;
+			}
+			var iFrame = BFVWidget.HTML5.createIFrame(options.height , options.width);
+			var url = 'widget/team/complete/club' + clubId + '/team' + teamPermanentId + '/ticker';
+			iFrame.src = BFVWidget.HTML5.getIFrameSrc(url + '?css=' + encodeURIComponent(JSON.stringify(options)));
+			BFVWidget.HTML5.getTargetDiv(targetDivId).appendChild(iFrame);
+		},
+
+		/***************************************
+		 * Creates the competition-table-widget.
+		 * compoundId - not null
+		 * targetDivId - not null - must be a valid id of an div-element
+		 * options - optional
+		 * 		height - the widget height
+		 * 		width - the widget with
+		 * 		seletedTab - the tab to be selected (see BFVWidget.HTML5.wettbewerbTabs)
+		 ***************************************/
+		zeigeWettbewerb: function(compoundId, targetDivId, options){
+			options = options || {};
+			if(!compoundId){
+				alert('Die ID des Wettbewerbs muss angegeben werden');
+				return;
+			}
+			var iFrame = BFVWidget.HTML5.createIFrame(options.height , options.width);
+			iFrame.src = BFVWidget.HTML5.getIFrameSrc('widget/competition/compound' + compoundId + (options.selectedTab ? '/' + options.selectedTab : '')  + '?css=' + encodeURIComponent(JSON.stringify(options)));
+			BFVWidget.HTML5.getTargetDiv(targetDivId).appendChild(iFrame);
+		},
+
+	    /***************************************
+		 * Creates the cub-widget.
+		 * compoundId - not null
+		 * targetDivId - not null - must be a valid id of an div-element
+		 * options - optional
+		 * 		height - the widget height
+		 * 		width - the widget with
+		 ***************************************/
+		zeigePokal: function(compoundId, targetDivId, options){
+			options = options || {};
+			if(!compoundId){
+				alert('Die ID des Wettbewerbs muss angegeben werden');
+				return;
+			}
+			var iFrame = BFVWidget.HTML5.createIFrame(options.height, options.width);
+			iFrame.src = BFVWidget.HTML5.getIFrameSrc('widget/cup/compound' + compoundId + (options.selectedTab ? '/' + options.selectedTab : '')  + '?css=' + encodeURIComponent(JSON.stringify(options)));
+			BFVWidget.HTML5.getTargetDiv(targetDivId).appendChild(iFrame);
+		},
+
+        /***************************************
+		 * Creates the mgc-news-widget.
+		 * teamPermanentId - not null
+		 * targetDivId - not null - must be a valid id of an div-element
+		 * options - optional
+		 * 		height - the widget height
+		 * 		width - the widget with
+		 ***************************************/
+		zeigeSpielbericht : function(teamId, targetDivId, options){
+               options = options || {};
+               if(!teamId){
+                     alert('Die ID des Teams muss angegeben werden');
+                     return;
+               }
+               var iFrame = BFVWidget.HTML5.createIFrame(options.height , options.width);
+               iFrame.src = BFVWidget.HTML5.getIFrameSrc('widget/team/spielbericht/team' + teamId + '?css=' + encodeURIComponent(JSON.stringify(options)));
+               BFVWidget.HTML5.getTargetDiv(targetDivId).appendChild(iFrame);
+         },
+
+};
