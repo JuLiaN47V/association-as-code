@@ -18,6 +18,11 @@ body:
       gallery: 
         - title: "Example Image"
           src: "example-image.webp"
+      bfvwidgets: 
+        - teamid: "60428905238095242232"
+          clubid: ""
+          compoundid: ""
+          type: "teamfull"
 footer:
   background_image: "example-background.svg"
   socials:
