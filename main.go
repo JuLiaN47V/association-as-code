@@ -6,8 +6,9 @@ import (
 	"html/template"
 	"net/http"
 	"strings"
-
+	"os"
 	"github.com/gin-gonic/gin"
+	"regexp"
 )
 
 func toLower(input string) string {
@@ -74,8 +75,59 @@ func main() {
 		}
 	}
 
-
 	// End Config Parsing
+
+
+	// Start theme-colors modification
+	// Read bootstrap css file
+	bootstrapPath := "static/css/bootstrap.css"
+	b, err := os.ReadFile(bootstrapPath)
+    if err != nil {
+        os.Exit(1)
+    }
+	customSCSScontent := string(b)
+	// End Read bootstrap css file
+	// Find Primary Color 
+	primaryRegex, _ := regexp.Compile("--bs-primary-rgb:\\s?\\w{1,},\\s?\\w{1,},\\s?\\w{1,};")
+	primary := primaryRegex.FindString(customSCSScontent)
+
+	primaryRGBRegex, _ := regexp.Compile("\\s?\\w{1,},\\s?\\w{1,},\\s?\\w{1,}")
+	primaryRGB := primaryRGBRegex.FindString(primary)
+	// End Find Primary Color
+	// Replace Primary Color
+	if primaryRGB != configStruct.Head.BackgroundColor {
+		newContents := strings.Replace(string(customSCSScontent), primaryRGB, configStruct.Head.BackgroundColor, -1)
+		err = os.WriteFile(bootstrapPath, []byte(newContents), 0)
+		if err != nil {
+			panic(err)
+		}
+	}
+	// End Replace Primary Color
+	// Reread bootstrap css file
+	b, err = os.ReadFile(bootstrapPath)
+    if err != nil {
+        os.Exit(1)
+    }
+	customSCSScontent = string(b)
+    // End Reread bootstrap css file
+	// Find Primary Color 
+	secondaryRegex, _ := regexp.Compile("--bs-secondary-rgb:\\s?\\w{1,},\\s?\\w{1,},\\s?\\w{1,};")
+	secondary := secondaryRegex.FindString(customSCSScontent)
+
+	secondaryRGBRegex, _ := regexp.Compile("\\s?\\w{1,},\\s?\\w{1,},\\s?\\w{1,}")
+	secondaryRGB := secondaryRGBRegex.FindString(secondary)
+	// End Find Primary Color
+	// Replace Primary Color
+	if secondaryRGB != configStruct.Head.TextColor {
+		newContents := strings.Replace(string(customSCSScontent), secondaryRGB, configStruct.Head.TextColor, -1)
+		err = os.WriteFile(bootstrapPath, []byte(newContents), 0)
+		if err != nil {
+			panic(err)
+		}
+	}
+	// End Replace Primary Color
+
+	// End theme-colors modification
 
 	// Static Router
 	router.Static("/static", "static")
