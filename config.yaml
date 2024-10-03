@@ -3,6 +3,8 @@ head:
   name: "Association Name"
   icon: "logo.ico"
   description: "Description"
+  backgroundcolor: "154, 93, 185"
+  textcolor: "255, 255, 255"
   slogan:
     font: "Sofia, sans-serif"
     top: "Your"
