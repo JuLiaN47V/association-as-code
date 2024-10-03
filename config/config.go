@@ -38,6 +38,12 @@ type Config struct {
 				Src   string `yaml:"src"`
 				Alt   string `yaml:"alt"`
 			} `yaml:"gallery"`
+			BFVWidgets []struct {
+				TeamID string `yaml:"teamid"`
+				ClubID string `yaml:"clubid"`
+				CompoundID string `yaml:"compoundid"`
+				Type string `yaml:"type"`
+			} `yaml:"bfvwidgets"`
 		} `yaml:"departments"`
 	} `yaml:"body"`
 	Footer struct {

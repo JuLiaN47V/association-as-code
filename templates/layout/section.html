@@ -3,6 +3,98 @@
 <div class="row">
     <h1 class="text-center mt-4" id="{{ $department.Name }}">{{ $department.Name }}</h1>
 </div>
+<div class="row">
+{{ if $department.BFVWidgets }}
+{{ range $widget := $department.BFVWidgets }}
+{{ if ne $widget.Type "invalid" }}
+  <div class="col">
+    {{ if eq $widget.Type "compoundtable" }}
+    <div id="{{ $widget.CompoundID }}Table" class="d-flex align-items-center justify-content-center">Laden...</div>
+      <script type='text/javascript' src="static/js/widgetjs">
+      </script>
+      <script>
+          BFVWidget.HTML5.zeigeWettbewerbsTabelle("{{ $widget.CompoundID }}", "{{ $widget.CompoundID }}Table", { height: "600", width: "350", selectedTab:BFVWidget.HTML5.mannschaftTabs.spiele, colorResults: "undefined" , colorNav: "undefined" , colorClubName : "undefined" , backgroundNav: "undefined"});
+      </script>
+    {{ end }}
+    {{ if eq $widget.Type "teamfull" }}
+    <div id="{{ $widget.TeamID }}Full" class="d-flex align-items-center justify-content-center">Laden...</div>
+      <script type='text/javascript' src="static/js/widgetjs">
+      </script>
+      <script>
+          BFVWidget.HTML5.zeigeMannschaftKomplett("{{ $widget.TeamID }}", "{{ $widget.TeamID }}Full", { height: "600", width: "350", selectedTab:BFVWidget.HTML5.mannschaftTabs.spiele, colorResults: "undefined" , colorNav: "undefined" , colorClubName : "undefined" , backgroundNav: "undefined"});
+      </script>
+    {{ end }}
+    {{ if eq $widget.Type "teamsmall" }}
+    <div id="{{ $widget.TeamID }}Small" class="d-flex align-items-center justify-content-center">Laden...</div>
+      <script type='text/javascript' src="static/js/widgetjs">
+      </script>
+      <script>
+          BFVWidget.HTML5.zeigeMannschaftMini("{{ $widget.TeamID }}", "{{ $widget.TeamID }}Small", { height: "600", width: "350", selectedTab:BFVWidget.HTML5.mannschaftTabs.spiele, colorResults: "undefined" , colorNav: "undefined" , colorClubName : "undefined" , backgroundNav: "undefined"});
+      </script>
+    {{ end }}
+    {{ if eq $widget.Type "clubgames" }}
+    <div id="{{ $widget.ClubID }}Games" class="d-flex align-items-center justify-content-center">Laden...</div>
+      <script type='text/javascript' src="static/js/widgetjs">
+      </script>
+      <script>
+          BFVWidget.HTML5.zeigeVereinSpiele("{{ $widget.ClubID }}", "{{ $widget.ClubID }}Games", { height: "600", width: "350", selectedTab:BFVWidget.HTML5.mannschaftTabs.spiele, colorResults: "undefined" , colorNav: "undefined" , colorClubName : "undefined" , backgroundNav: "undefined"});
+      </script>
+    {{ end }}
+    {{ if eq $widget.Type "clubvideo" }}
+    <div id="{{ $widget.ClubID }}Video" class="d-flex align-items-center justify-content-center">Laden...</div>
+      <script type='text/javascript' src="static/js/widgetjs">
+      </script>
+      <script>
+          BFVWidget.HTML5.zeigeVereinsVideo("{{ $widget.ClubID }}", "{{ $widget.ClubID }}Video", { height: "600", width: "350", selectedTab:BFVWidget.HTML5.mannschaftTabs.spiele, colorResults: "undefined" , colorNav: "undefined" , colorClubName : "undefined" , backgroundNav: "undefined"});
+      </script>
+    {{ end }}
+    {{ if eq $widget.Type "compoundvideo" }}
+    <div id="{{ $widget.CompoundID }}Video" class="d-flex align-items-center justify-content-center">Laden...</div>
+      <script type='text/javascript' src="static/js/widgetjs">
+      </script>
+      <script>
+          BFVWidget.HTML5.zeigeLigaVideo("{{ $widget.CompoundID }}", "{{ $widget.CompoundID }}Video", { height: "600", width: "350", selectedTab:BFVWidget.HTML5.mannschaftTabs.spiele, colorResults: "undefined" , colorNav: "undefined" , colorClubName : "undefined" , backgroundNav: "undefined"});
+      </script>
+    {{ end }}
+    {{ if eq $widget.Type "teamliveticker" }}
+    <div id="{{ $widget.TeamID }}Liveticker" class="d-flex align-items-center justify-content-center">Laden...</div>
+      <script type='text/javascript' src="static/js/widgetjs">
+      </script>
+      <script>
+          BFVWidget.HTML5.zeigeMannschaftsLiveticker("{{ $widget.ClubID }}", "{{ $widget.TeamID }}", "{{ $widget.TeamID }}Liveticker", { height: "600", width: "350", selectedTab:BFVWidget.HTML5.mannschaftTabs.spiele, colorResults: "undefined" , colorNav: "undefined" , colorClubName : "undefined" , backgroundNav: "undefined"});
+      </script>
+    {{ end }}
+    {{ if eq $widget.Type "compound" }}
+    <div id="{{ $widget.CompoundID }}League" class="d-flex align-items-center justify-content-center">Laden...</div>
+      <script type='text/javascript' src="static/js/widgetjs">
+      </script>
+      <script>
+          BFVWidget.HTML5.zeigeWettbewerb("{{ $widget.CompoundID }}", "{{ $widget.CompoundID }}League", { height: "600", width: "350", selectedTab:BFVWidget.HTML5.mannschaftTabs.spiele, colorResults: "undefined" , colorNav: "undefined" , colorClubName : "undefined" , backgroundNav: "undefined"});
+      </script>
+    {{ end }}
+    {{ if eq $widget.Type "cup" }}
+    <div id="{{ $widget.CompoundID }}Cup" class="d-flex align-items-center justify-content-center">Laden...</div>
+      <script type='text/javascript' src="static/js/widgetjs">
+      </script>
+      <script>
+          BFVWidget.HTML5.zeigePokal("{{ $widget.CompoundID }}", "{{ $widget.CompoundID }}Cup", { height: "600", width: "350", selectedTab:BFVWidget.HTML5.mannschaftTabs.spiele, colorResults: "undefined" , colorNav: "undefined" , colorClubName : "undefined" , backgroundNav: "undefined"});
+      </script>
+    {{ end }}
+    {{ if eq $widget.Type "gamereport" }}
+    <div id="{{ $widget.TeamID }}Report" class="d-flex align-items-center justify-content-center">Laden...</div>
+      <script type='text/javascript' src="static/js/widgetjs">
+      </script>
+      <script>
+          BFVWidget.HTML5.zeigeSpielbericht("{{ $widget.TeamID }}", "{{ $widget.TeamID }}Report", { height: "600", width: "350", selectedTab:BFVWidget.HTML5.mannschaftTabs.spiele, colorResults: "undefined" , colorNav: "undefined" , colorClubName : "undefined" , backgroundNav: "undefined"});
+      </script>
+    {{ end }}
+    <!-- <div style="height: 600px; width: 350px; background-color: red;">
+    </div> -->
+  </div>
+{{ end }}
+{{ end }}
+{{ end }}
+</div>
 {{ if .Contacts }}
 <div class="row">
   <h2 class="text-center mt-4" id="{{ $department.Name }}Contacts">{{ if $lang.Contacts }}{{ $lang.Contacts }}{{ else }}Contacts{{ end }}</h1>
