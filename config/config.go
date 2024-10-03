@@ -14,6 +14,8 @@ type Config struct {
 		Name        string `yaml:"name"`
 		Icon        string `yaml:"icon"`
 		Description string `yaml:"description"`
+		BackgroundColor string `yaml:"backgroundcolor"`
+		TextColor string `yaml:"textcolor"`
 		Slogan      struct {
 			Font   string `yaml:"font"`
 			Top    string `yaml:"top"`
