@@ -138,7 +138,7 @@ func main() {
 	// Custom Pages Router
 	for _, customPage := range configStruct.CustomPages{
 		router.GET(customPage.Name, func(c *gin.Context) {
-			if c.Request.TLS != nil {
+			if configStruct.TLS {
 				scheme = "https"
 			}
 			c.HTML(http.StatusOK, customPage.File, gin.H{
@@ -157,7 +157,7 @@ func main() {
     })
 	router.GET("/", func(c *gin.Context) {
 		
-		if c.Request.TLS != nil {
+		if configStruct.TLS {
 			scheme = "https"
 		}
 		c.HTML(http.StatusOK, "index.html", gin.H{

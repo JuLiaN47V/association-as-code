@@ -9,6 +9,7 @@ import (
 )
 
 type Config struct {
+	TLS bool `yaml:"tls"`
 	Head struct {
 		Logo        string `yaml:"logo"`
 		Name        string `yaml:"name"`
