@@ -107,8 +107,12 @@
     <h6 class="card-subtitle mb-2 text-muted">{{ $contact.Title }}</h6>
     <div class="collapse" id="{{ $department.Name }}Contact{{ $index }}Collapse">
       <p>{{ $contact.Description }}</p>
+      {{ if $contact.Email }}
       <p>eMail: {{ $contact.Email }}</p>
+      {{ end }}
+      {{ if $contact.Tel }}
       <p>Tel.: {{ $contact.Tel }}</p>
+      {{ end }}
 
     </div>
     <div class="mt-auto">
