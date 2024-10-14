@@ -10,6 +10,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"regexp"
 )
+import _ "embed"
+
+//go:embed aac_logo.png
+var aac_logo []byte
 
 func toLower(input string) string {
     return strings.ToLower(input)
@@ -18,6 +22,8 @@ func toLower(input string) string {
 
 
 func main() {
+
+	os.WriteFile("static/img/aac_logo.png", aac_logo, 0644)
 	
 	configFilePath := "config.yaml"
 	configStruct := config.ReadConfig(configFilePath)
