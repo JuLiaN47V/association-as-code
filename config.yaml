@@ -17,7 +17,7 @@ body:
         - name: "Don Joe"
           title: "responsible"
           description: "responsible for Example Sport"
-          tel: "555123456"
+          email: "don.joe@example.com"
       gallery: 
         - title: "Example Image"
           src: "example-image.webp"

@@ -100,24 +100,21 @@
   <h2 class="text-center mt-4" id="{{ $department.Name }}Contacts">{{ if $lang.Contacts }}{{ $lang.Contacts }}{{ else }}Contacts{{ end }}</h1>
 </div>
 <div class="row pt-4 justify-content-center">
-{{ range $contact := .Contacts}}
+{{ range $index, $contact := .Contacts}}
 <div class="card gallerycard shadow mx-4">
   <div class="card-body d-flex flex-column">
     <h5 class="card-title">{{ $contact.Name }}</h5>
     <h6 class="card-subtitle mb-2 text-muted">{{ $contact.Title }}</h6>
-    <div class="collapse" id="{{ $contact.Title }}{{ $department.Name }}Collapse">
+    <div class="collapse" id="{{ $department.Name }}Contact{{ $index }}Collapse">
       <p>{{ $contact.Description }}</p>
+      <p>eMail: {{ $contact.Email }}</p>
+      <p>Tel.: {{ $contact.Tel }}</p>
+
     </div>
     <div class="mt-auto">
-      <div class="collapse" id="{{ $contact.Title }}{{ $department.Name }}Collapse">
-        <table>
-        <tr>
-            <td>Tel.: </td>
-            <td>{{ $contact.Tel }}</td>
-        </tr>
-        </table>
+      <div class="collapse" id="{{ $department.Name }}Contact{{ $index }}Collapse">
       </div>
-      <button onclick="changeText(this, {{ $lang.ShowMore }}, {{ $lang.ShowLess }})" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $contact.Title }}{{ $department.Name }}Collapse" aria-expanded="false" aria-controls="{{ $contact.Title }}{{ $department.Name }}Collapse">
+      <button onclick="changeText(this, {{ $lang.ShowMore }}, {{ $lang.ShowLess }})" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $department.Name }}Contact{{ $index }}Collapse" aria-expanded="false" aria-controls="{{ $department.Name }}Contact{{ $index }}Collapse">
         {{ if $lang.ShowMore }}{{ $lang.ShowMore }}{{ else }}Show more{{ end }}
       </button>
   </div>

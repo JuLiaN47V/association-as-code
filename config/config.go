@@ -34,6 +34,7 @@ type Config struct {
 				Name        string `yaml:"name"`
 				Title       string `yaml:"title"`
 				Description string `yaml:"description"`
+				Email		string `yaml:"email"`
 				Tel         string `yaml:"tel"`
 			} `yaml:"contacts"`
 			Gallery []struct {
