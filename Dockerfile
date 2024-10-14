@@ -1,6 +1,6 @@
 FROM golang:1.22.2-alpine3.18 AS build
 WORKDIR /src
-COPY main.go go.mod go.sum .
+COPY main.go go.mod go.sum aac_logo.png .
 COPY config config
 RUN go mod download
 RUN go mod tidy
