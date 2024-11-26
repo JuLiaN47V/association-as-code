@@ -34,10 +34,22 @@ jobs:
       - name: Test Debug
         run: |
           docker run --rm -d -p 8090:8090 --name ${{ env.CONTAINER_NAME }}-debug ${{ env.TEST_TAG }} -d
+      - name: Wait for Service to Start
+        run: |
+          for i in {1..10}; do
+            if curl --silent --fail http://127.0.0.1:8090; then
+              echo "Service is up!"
+              exit 0
+            fi
+            echo "Waiting for service to be ready..."
+            sleep 3
+          done
+          echo "Service did not start in time"
+          exit 1
       - name: Curl
         uses: indiesdev/curl@v1.1
         with:
-          url: http://127.0.0.1:8090
+          url: http://host.docker.internal:8090
       - name: Remove docker container
         run: |
           docker rm -f ${{ env.CONTAINER_NAME }}-debug
