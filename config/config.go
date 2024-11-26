@@ -10,6 +10,7 @@ import (
 
 type Config struct {
 	TLS bool `yaml:"tls"`
+	LogToFile string `yaml:"log_to_file"`
 	Head struct {
 		Logo        string `yaml:"logo"`
 		Name        string `yaml:"name"`
