@@ -3,23 +3,31 @@ package main
 import (
 	"aas/config"
 	"flag"
+	"fmt"
 	"html/template"
+	"io"
 	"net/http"
-	"strings"
 	"os"
-	"github.com/gin-gonic/gin"
 	"regexp"
+	"strings"
+
+	"github.com/gin-gonic/gin"
+
+	_ "embed"
 )
-import _ "embed"
 
 //go:embed aac_logo.png
 var aac_logo []byte
+var err error
 
 func toLower(input string) string {
     return strings.ToLower(input)
 }
 
-
+func exitError(err error) {
+	fmt.Println(err.Error())
+	os.Exit(1)
+}
 
 func main() {
 
@@ -30,7 +38,11 @@ func main() {
 	languageStruct := config.ReadLanguage("langs/"+configStruct.LangFile)
 
 
+
+
 	// Flags
+	var logFile *os.File
+	var logFilePath string
 	var watchFlag bool
 	var debugFlag bool
 	flag.BoolVar(&watchFlag, "w", false, "Watch config file for changes")
@@ -41,9 +53,37 @@ func main() {
 		go config.Watch(configStruct, &configFilePath)
 	}
 
+	logFilePath = configStruct.LogToFile
+	// debug/productive config
 	if !debugFlag {
 		gin.SetMode(gin.ReleaseMode)
+		if configStruct.LogToFile != "" {
+		} else {
+			logFilePath = "./aac.log"
+		}
+		gin.DisableConsoleColor()
+		logFile, err = os.Create(logFilePath)
+		if err != nil {
+			exitError(err)
+		}
+		gin.DefaultWriter = io.MultiWriter(logFile)
+	} else {
+		if configStruct.LogToFile != "" {
+			gin.DisableConsoleColor()
+			logFile, err = os.Create(logFilePath)
+			fmt.Println(logFilePath)
+			if err != nil {
+				exitError(err)
+			}
+			gin.DefaultWriter = io.MultiWriter(logFile, os.Stdout)
+		}else {
+			gin.DefaultWriter = io.MultiWriter(os.Stdout)
+		}
+		
 	}
+	// End debug/productive config
+
+	
 	// End Flags
 
 
@@ -89,7 +129,7 @@ func main() {
 	bootstrapPath := "static/css/bootstrap.css"
 	b, err := os.ReadFile(bootstrapPath)
     if err != nil {
-        os.Exit(1)
+        exitError(err)
     }
 	customSCSScontent := string(b)
 	// End Read bootstrap css file
@@ -105,14 +145,14 @@ func main() {
 		newContents := strings.Replace(string(customSCSScontent), primaryRGB, configStruct.Head.BackgroundColor, -1)
 		err = os.WriteFile(bootstrapPath, []byte(newContents), 0)
 		if err != nil {
-			panic(err)
+			exitError(err)
 		}
 	}
 	// End Replace Primary Color
 	// Reread bootstrap css file
 	b, err = os.ReadFile(bootstrapPath)
     if err != nil {
-        os.Exit(1)
+        exitError(err)
     }
 	customSCSScontent = string(b)
     // End Reread bootstrap css file
@@ -177,7 +217,7 @@ func main() {
 
 
 	if debugFlag {
-		router.Run(":8090")
+		router.Run("127.0.0.1:8090")
 	} else{
 		router.Run("0.0.0.0:80")
 	}
