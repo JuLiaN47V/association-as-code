@@ -217,7 +217,7 @@ func main() {
 
 
 	if debugFlag {
-		router.Run("127.0.0.1:8090")
+		router.Run(":8090")
 	} else{
 		router.Run("0.0.0.0:80")
 	}
