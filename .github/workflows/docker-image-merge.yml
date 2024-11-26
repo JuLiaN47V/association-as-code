@@ -33,9 +33,7 @@ jobs:
           tags: ${{ env.TEST_TAG }}
       - name: Test Debug
         run: |
-          docker run --rm -d -p 127.0.0.1:8090:8090 --name ${{ env.CONTAINER_NAME }}-debug ${{ env.TEST_TAG }} -d
-      - name: Debug Container
-        run: docker logs ${{ env.CONTAINER_NAME }}-debug
+          docker run --rm -d -p 8090:8090 --name ${{ env.CONTAINER_NAME }}-debug ${{ env.TEST_TAG }} -d
       - name: Curl
         uses: indiesdev/curl@v1.1
         with:
