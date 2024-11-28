@@ -1,4 +1,5 @@
 tls: false
+theme: starborn
 head:
   logo: "logo.svg"
   name: "Association Name"
