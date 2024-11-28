@@ -19,6 +19,7 @@ import (
 //go:embed aac_logo.png
 var aac_logo []byte
 var err error
+var theme = "starborn"
 
 func toLower(input string) string {
     return strings.ToLower(input)
@@ -27,6 +28,26 @@ func toLower(input string) string {
 func exitError(err error) {
 	fmt.Println(err.Error())
 	os.Exit(1)
+}
+
+func getHTMLTemplates(inputPath string) []string {
+	var returnList []string
+	entries, err := os.ReadDir(inputPath)
+	if err != nil {
+		exitError(err)
+	}
+	for _, entry := range entries {
+
+		if entry.IsDir() {
+			// Append results of the recursive call
+			subDirPath := inputPath + "/" + entry.Name() // Ensure path separators are correct
+			returnList = append(returnList, getHTMLTemplates(subDirPath)...)
+		} else {
+			// Add the file with its full path
+			returnList = append(returnList, inputPath+"/"+entry.Name())
+		}
+	}
+	return returnList
 }
 
 func main() {
@@ -82,14 +103,31 @@ func main() {
 		
 	}
 	// End debug/productive config
+	if configStruct.Theme != ""{
+		theme = configStruct.Theme
+	}
 
 	
 	// End Flags
 
 
-	router := gin.Default()
-	router.LoadHTMLGlob("templates/**/*")
+	// Get all Templates
 
+
+	var templates []string
+	customPagesEntries, err := os.ReadDir("./templates/custom_pages")
+	for _, e := range customPagesEntries{
+		templates = append(templates, "./templates/custom_pages/" + e.Name())
+	}
+	themeTemplates := getHTMLTemplates("./templates/themes/" + theme)
+	for _, themeTemplate := range themeTemplates{
+		templates = append(templates, themeTemplate)
+	}
+    // End Get all Templates
+
+	router := gin.Default()
+	router.LoadHTMLFiles(templates...)
+	
 
 	// Start Config Parsing
 	for department_iteration, department := range configStruct.Body.Departments{
