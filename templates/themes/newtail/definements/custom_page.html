@@ -1,0 +1,21 @@
+{{ define "above_content" }}
+<!DOCTYPE html>
+<html lang="de">
+{{ template "head.html" .}}
+<body>
+    <div class="container-fluid min-vh-100 d-flex flex-column">
+        <div class="row flex-grow-1">
+            <div class="d-none d-md-block col-2 position-fixed h-100 bg-primary">
+              {{ template "sidebar.html" . }}
+            </div>
+            <div class="col offset-md-2">
+              <div class="content">
+{{ end }}
+{{ define "below_content" }}
+              </div>
+            </div>
+        </div>
+    </div>
+</body>
+{{ end }}
+

@@ -1,5 +1,5 @@
 tls: false
-theme: starborn
+theme: newtail
 head:
   logo: "logo.svg"
   name: "Association Name"

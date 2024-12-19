@@ -1,4 +1,4 @@
-{{ define "top" }}
+{{ define "above_content" }}
 <!DOCTYPE html>
 <html lang="de">
 {{ template "head.html" .}}
@@ -7,7 +7,7 @@
 
 <div class="container-fluid">
 {{ end }}
-{{ define "bottom" }}
+{{ define "bottom_content" }}
     <img class="bg-img bg footer center-block" src="static/img/{{ .config.Footer.BackgroundImage }}" style="z-index: -1" alt="banner">
 </div>
 

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+{{ template "head.html" .}}
+{{ $entry := . }}
+{{ $lang := .lang }}
+
+<head>
+    <!-- Add Bootstrap CSS if not already included -->
+    <style>
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+        .banner-container {
+            min-height: 120px; /* Adjust this value as needed */
+        }
+        .full-width {
+            width: 100%;
+        }
+        .navbar-toggler {
+            font-size: 1.5rem; /* Increase the size of the button */
+        }
+        .content-container {
+            margin-top: 150px; /* Adjust this value to match the height of the fixed-top row */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid min-vh-100 d-flex flex-column">
+        <div class="row flex-grow-1">
+            <div class="d-none d-md-block col-2 position-fixed h-100 bg-primary">
+              {{ template "sidebar.html" . }}
+            </div>
+            <div class="col offset-md-2">
+                <div class="row d-md-none fixed-top">
+                    <div class="col-12 bg-primary text-white text-center py-3 position-relative banner-container">
+                        <h1 class="text-secondary">{{ .config.Head.Name }}</h1>
+                        <button class="navbar-toggler mt-2 position-absolute start-0 ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    <div class="collapse p-0" id="navbarNavDropdown">
+                      <div class="bg-light p-4 bg-primary">
+                        <ul class="navbar-nav flex-column mt-0">
+                          {{ range $section := .config.Body.Departments }}
+                          <li class="nav-item">
+                            <a class="nav-link active text-secondary" data-bs-toggle="collapse" href="#collapse{{ $section.Name }}" role="button" aria-expanded="false" aria-controls="collapse{{ $section.Name }}">
+                              {{ $section.Name }}
+                            </a>
+                            <div class="collapse" id="collapse{{ $section.Name }}">
+                              <ul class="navbar-nav flex-column ms-3">
+                                {{ if $section.Contacts }}
+                                <li class="nav-item">
+                                  <a class="nav-link active text-secondary" href="{{ $entry.uri }}/#{{ $section.Name }}Contacts">{{ if $lang.Contacts }}{{ $lang.Contacts }}{{ else }}Contacts{{ end }}</a>
+                                </li>
+                                {{ end }}
+                                {{ if $section.Gallery }}
+                                <li class="nav-item">
+                                  <a class="nav-link active text-secondary" href="{{ $entry.uri }}/#{{ $section.Name }}Gallery">{{ if $lang.Gallery}}{{ $lang.Gallery }}{{ else }}Gallery{{ end }}</a>
+                                </li>
+                                {{ end }}
+                              </ul>
+                            </div>
+                          </li>
+                          {{ end}}
+                          {{ if .config.Footer.Socials }}
+                          <li class="nav-item">
+                            <a class="nav-link active text-secondary" aria-current="page" href="{{ $entry.uri }}/#social">Social</a>
+                          </li>
+                          {{ end }}
+                          <li class="nav-item">
+                            <a class="nav-link active text-secondary" href="{{ $entry.uri }}/#contacts">{{ if $lang.Contacts }}{{ $lang.Contacts }}{{ else }}Contacts{{ end }}
+                            </a>
+                          </li>
+                          {{ if not (eq .config.Body.Strapi.Name "") }}
+                          <li class="nav-item">
+                            <a class="nav-link active text-secondary" href="{{ .config.Body.Strapi.Name }}" target="_blank">{{ .config.Body.Strapi.Name }}</a>
+                          </li>
+                          {{ end }}
+                          {{ if .customPages }}
+                          {{ range $customPage := .customPages }}
+                          <li class="nav-item">
+                            <a class="nav-link active text-secondary" href="{{ $customPage.Name }}">{{ $customPage.Name }}</a>
+                          </li>
+                          {{ end }}
+                          {{ end }}
+                          {{ range $site := .config.LinkedSites }}
+                          {{ if eq $site.Type "dropdown" }}
+                          <li class="nav-item">
+                            <a class="nav-link active text-secondary" data-bs-toggle="collapse" href="#collapse{{ $site.Name }}" role="button" aria-expanded="false" aria-controls="collapse{{ $site.Name }}">
+                              {{ $site.Name }}
+                            </a>
+                            <div class="collapse" id="collapse{{ $site.Name }}">
+                              <ul class="navbar-nav flex-column ms-3">
+                                {{ range $link := $site.Links }}
+                                <li class="nav-item">
+                                  <a class="nav-link active text-secondary" href="{{ $link.URL }}" target="_blank"> {{ $link.Name }} </a>
+                                </li>
+                                {{ end }}
+                              </ul>
+                            </div>
+                          </li>
+                          {{ else if eq $site.Type "link" }}
+                          <li class="nav-item">
+                            <a class="nav-link active text-secondary" aria-current="page" target="_blank" href="{{ $site.URL }}">{{ $site.Name }}</a>
+                          </li>
+                          {{ end }}
+                          {{ end }}
+                        </ul>
+                      </div>
+                  </div>
+                </div>
+                <div class="row content-container mt-0 d-none d-md-block">
+                    <div class="col">
+                        <div class="content">
+                            {{ template "section.html" . }}
+                            {{ template "footer.html" .}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row content-container d-md-none">
+                  <div class="col">
+                      <div class="content">
+                          {{ template "section.html" . }}
+                          {{ template "footer.html" .}}
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <img class="bg-img bg footer center-block" src="static/img/{{ .config.Footer.BackgroundImage }}" style="z-index: -1" alt="banner">
+    </div>
+</body>
+</html>
