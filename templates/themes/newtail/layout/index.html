@@ -34,10 +34,10 @@
             <div class="col offset-md-2">
                 <div class="row d-md-none fixed-top">
                     <div class="col-12 bg-primary text-white text-center py-3 position-relative banner-container">
-                        <h1 class="text-secondary">{{ .config.Head.Name }}</h1>
-                        <button class="navbar-toggler mt-2 position-absolute start-0 ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
-                        </button>
+                      <h1 class="text-secondary"><a class="text-reset text-decoration-none" href="{{ .uri }}/">{{ .config.Head.Name }}</a></h1>
+                      <button class="navbar-toggler mt-2 position-absolute start-0 ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
                     </div>
                     <div class="collapse p-0" id="navbarNavDropdown">
                       <div class="bg-light p-4 bg-primary">
