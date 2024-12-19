@@ -1,0 +1,28 @@
+{{ $entry := .}}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ .config.Head.Description }}">
+    <link rel="icon" href="{{ .uri }}/static/img/{{ .config.Head.Icon }}">
+
+    <link rel="stylesheet" href="{{ .uri }}/static/css/bootstrap.css"></link>
+    <link rel="stylesheet" href="{{ .uri }}/static/css/base.css"></link>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ .uri }}/static/js/base.js"></script>
+
+    <title>{{ .config.Head.Name }}</title>
+</head>
+
+<style>
+    {{ if .config.Fonts }}
+    {{ range $font := .config.Fonts }}
+    @font-face {
+    font-family: '{{ $font.Name }}';
+    src: url('{{ $entry.uri }}/static/fonts/{{ $font.Src }}') format('woff');
+    font-weight: "{{ $font.FontWeight }}";
+    font-style: "{{ $font.FontStyle }}";
+    }
+    {{ end }}
+    {{ end }}
+
+</style>

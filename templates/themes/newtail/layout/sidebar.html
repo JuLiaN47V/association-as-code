@@ -1,0 +1,76 @@
+{{ $entry := . }}
+{{ $lang := .lang }}
+<nav class="navbar navbar-expand-md navbar-light bg-light flex-column align-items-center overflow-auto h-100">
+    <div class="w-100 text-center mt-3">
+        <a class="navbar-brand mx-auto d-block text-secondary" href="{{ .uri }}/">{{ .config.Head.Name }}</a>
+        <img width="100" height="100" src="static/img/{{ .config.Head.Logo }}"></img>
+      </div>
+    <div class="collapse navbar-collapse w-100 align-items-start">
+      <ul class="navbar-nav flex-column mt-0">
+        {{ range $section := .config.Body.Departments }}
+        <li class="nav-item">
+          <a class="nav-link active text-secondary" data-bs-toggle="collapse" href="#collapse{{ $section.Name }}" role="button" aria-expanded="false" aria-controls="collapse{{ $section.Name }}">
+            {{ $section.Name }}
+          </a>
+          <div class="collapse" id="collapse{{ $section.Name }}">
+            <ul class="navbar-nav flex-column ms-3">
+              {{ if $section.Contacts }}
+              <li class="nav-item">
+                <a class="nav-link active text-secondary" href="{{ $entry.uri }}/#{{ $section.Name }}Contacts">{{ if $lang.Contacts }}{{ $lang.Contacts }}{{ else }}Contacts{{ end }}</a>
+              </li>
+              {{ end }}
+              {{ if $section.Gallery }}
+              <li class="nav-item">
+                <a class="nav-link active text-secondary" href="{{ $entry.uri }}/#{{ $section.Name }}Gallery">{{ if $lang.Gallery}}{{ $lang.Gallery }}{{ else }}Gallery{{ end }}</a>
+              </li>
+              {{ end }}
+            </ul>
+          </div>
+        </li>
+        {{ end}}
+        {{ if .config.Footer.Socials }}
+        <li class="nav-item">
+          <a class="nav-link active text-secondary" aria-current="page" href="{{ $entry.uri }}/#social">Social</a>
+        </li>
+        {{ end }}
+        <li class="nav-item">
+          <a class="nav-link active text-secondary" href="{{ $entry.uri }}/#contacts">{{ if $lang.Contacts }}{{ $lang.Contacts }}{{ else }}Contacts{{ end }}
+          </a>
+        </li>
+        {{ if not (eq .config.Body.Strapi.Name "") }}
+        <li class="nav-item">
+          <a class="nav-link active text-secondary" href="{{ .config.Body.Strapi.Name }}" target="_blank">{{ .config.Body.Strapi.Name }}</a>
+        </li>
+        {{ end }}
+        {{ if .customPages }}
+        {{ range $customPage := .customPages }}
+        <li class="nav-item">
+          <a class="nav-link active text-secondary" href="{{ $customPage.Name }}">{{ $customPage.Name }}</a>
+        </li>
+        {{ end }}
+        {{ end }}
+        {{ range $site := .config.LinkedSites }}
+        {{ if eq $site.Type "dropdown" }}
+        <li class="nav-item">
+          <a class="nav-link active text-secondary" data-bs-toggle="collapse" href="#collapse{{ $site.Name }}" role="button" aria-expanded="false" aria-controls="collapse{{ $site.Name }}">
+            {{ $site.Name }}
+          </a>
+          <div class="collapse" id="collapse{{ $site.Name }}">
+            <ul class="navbar-nav flex-column ms-3">
+              {{ range $link := $site.Links }}
+              <li class="nav-item">
+                <a class="nav-link active text-secondary" href="{{ $link.URL }}" target="_blank"> {{ $link.Name }} </a>
+              </li>
+              {{ end }}
+            </ul>
+          </div>
+        </li>
+        {{ else if eq $site.Type "link" }}
+        <li class="nav-item">
+          <a class="nav-link active text-secondary" aria-current="page" target="_blank" href="{{ $site.URL }}">{{ $site.Name }}</a>
+        </li>
+        {{ end }}
+        {{ end }}
+      </ul>
+    </div>
+  </nav>
