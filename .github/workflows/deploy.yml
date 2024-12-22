@@ -29,7 +29,7 @@ jobs:
       working-directory: ./docs
 
     - name: Build Jekyll site
-      run: bundle exec jekyll build
+      run: bundle exec jekyll build -d docs
       working-directory: ./docs
 
     - name: Deploy to GitHub Pages
