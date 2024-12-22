@@ -1,0 +1,17 @@
+{
+  "name": "association-as-code",
+  "version": "1.0.0",
+  "description": "Project for managing association configurations and documentation",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo 'No build script defined' && exit 0",
+    "build-docs": "typedoc --out docs src"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "typedoc": "^0.22.10"
+  }
+}
