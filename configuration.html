@@ -1,224 +1,319 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en-US">
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configuration Guide</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <h1>Configuration Guide</h1>
-    <p>This guide explains how to configure your project using the <code>config.yaml</code> file.</p>
 
-    <h2>Overview</h2>
-    <p>The <code>config.yaml</code> file contains various settings to customize your project. Below is a breakdown of each section and its options.</p>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Configuration Guide | Project Documentation</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Configuration Guide" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Documentation for the project" />
+<meta property="og:description" content="Documentation for the project" />
+<meta property="og:site_name" content="Project Documentation" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Configuration Guide" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Documentation for the project","headline":"Configuration Guide","url":"/configuration.html"}</script>
+<!-- End Jekyll SEO tag -->
 
-    <h2>Configuration Sections</h2>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
 
-    <h3><code>tls</code></h3>
-    <p><strong>Description</strong>: Enable or disable TLS.</p>
-    <p><strong>Type</strong>: Boolean</p>
-    <p><strong>Example</strong>: <code>tls: false</code></p>
+<!-- Setup Google Analytics -->
 
-    <h3><code>head</code></h3>
-    <p><strong>Description</strong>: Configuration for the HTML head section.</p>
-    <p><strong>Options</strong>:</p>
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name">Configuration Guide</h1>
+      <h2 class="project-tagline">Documentation for the project</h2>
+      
+      
+    </header>
+
+    <main id="content" class="main-content" role="main">
+      <h1 id="configuration-guide">Configuration Guide</h1>
+
+<p>This guide explains how to configure your project using the <code class="language-plaintext highlighter-rouge">config.yaml</code> file.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">config.yaml</code> file contains various settings to customize your project. Below is a breakdown of each section and its options.</p>
+
+<h2 id="configuration-sections">Configuration Sections</h2>
+
+<h3 id="tls"><code class="language-plaintext highlighter-rouge">tls</code></h3>
+
+<ul>
+  <li><strong>Description</strong>: Enable or disable TLS.</li>
+  <li><strong>Type</strong>: Boolean</li>
+  <li><strong>Example</strong>: <code class="language-plaintext highlighter-rouge">tls: false</code></li>
+</ul>
+
+<h3 id="head"><code class="language-plaintext highlighter-rouge">head</code></h3>
+
+<ul>
+  <li><strong>Description</strong>: Configuration for the HTML head section.</li>
+  <li><strong>Options</strong>:
     <ul>
-        <li><code>logo</code>: Path to the logo image.</li>
-        <li><code>name</code>: Name of the association.</li>
-        <li><code>icon</code>: Path to the favicon.</li>
-        <li><code>description</code>: Meta description for the site.</li>
-        <li><code>backgroundcolor</code>: Background color in RGB format.</li>
-        <li><code>textcolor</code>: Text color in RGB format.</li>
-        <li><code>slogan</code>:
+      <li><code class="language-plaintext highlighter-rouge">logo</code>: Path to the logo image.</li>
+      <li><code class="language-plaintext highlighter-rouge">name</code>: Name of the association.</li>
+      <li><code class="language-plaintext highlighter-rouge">icon</code>: Path to the favicon.</li>
+      <li><code class="language-plaintext highlighter-rouge">description</code>: Meta description for the site.</li>
+      <li><code class="language-plaintext highlighter-rouge">backgroundcolor</code>: Background color in RGB format.</li>
+      <li><code class="language-plaintext highlighter-rouge">textcolor</code>: Text color in RGB format.</li>
+      <li><code class="language-plaintext highlighter-rouge">slogan</code>:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">font</code>: Font for the slogan.</li>
+          <li><code class="language-plaintext highlighter-rouge">top</code>: Top part of the slogan.</li>
+          <li><code class="language-plaintext highlighter-rouge">bottom</code>: Bottom part of the slogan.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Example</strong>:
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">head</span><span class="pi">:</span>
+  <span class="na">logo</span><span class="pi">:</span> <span class="s2">"</span><span class="s">logo.svg"</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Association</span><span class="nv"> </span><span class="s">Name"</span>
+  <span class="na">icon</span><span class="pi">:</span> <span class="s2">"</span><span class="s">logo.ico"</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Description"</span>
+  <span class="na">backgroundcolor</span><span class="pi">:</span> <span class="s2">"</span><span class="s">154,</span><span class="nv"> </span><span class="s">93,</span><span class="nv"> </span><span class="s">185"</span>
+  <span class="na">textcolor</span><span class="pi">:</span> <span class="s2">"</span><span class="s">255,</span><span class="nv"> </span><span class="s">255,</span><span class="nv"> </span><span class="s">255"</span>
+  <span class="na">slogan</span><span class="pi">:</span>
+    <span class="na">font</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Sofia,</span><span class="nv"> </span><span class="s">sans-serif"</span>
+    <span class="na">top</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Your"</span>
+    <span class="na">bottom</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Slogan"</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="body"><code class="language-plaintext highlighter-rouge">body</code></h3>
+
+<ul>
+  <li><strong>Description</strong>: Configuration for the body section.</li>
+  <li><strong>Options</strong>:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">departments</code>: List of departments.
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">name</code>: Name of the department.</li>
+          <li><code class="language-plaintext highlighter-rouge">contacts</code>: List of contacts.
             <ul>
-                <li><code>font</code>: Font for the slogan.</li>
-                <li><code>top</code>: Top part of the slogan.</li>
-                <li><code>bottom</code>: Bottom part of the slogan.</li>
+              <li><code class="language-plaintext highlighter-rouge">name</code>: Name of the contact.</li>
+              <li><code class="language-plaintext highlighter-rouge">title</code>: Title of the contact.</li>
+              <li><code class="language-plaintext highlighter-rouge">description</code>: Description of the contact.</li>
+              <li><code class="language-plaintext highlighter-rouge">email</code>: Email of the contact.</li>
+              <li><code class="language-plaintext highlighter-rouge">tel</code>: Telephone number of the contact.</li>
             </ul>
-        </li>
-    </ul>
-
-    <p><strong>Example</strong>:</p>
-    <pre><code>head:
-  logo: "logo.svg"
-  name: "Association Name"
-  icon: "logo.ico"
-  description: "Description"
-  backgroundcolor: "154, 93, 185"
-  textcolor: "255, 255, 255"
-  slogan:
-    font: "Sofia, sans-serif"
-    top: "Your"
-    bottom: "Slogan"
-</code></pre>
-
-    <h3><code>body</code></h3>
-    <p><strong>Description</strong>: Configuration for the body section.</p>
-    <p><strong>Options</strong>:</p>
-    <ul>
-        <li><code>departments</code>: List of departments.
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">gallery</code>: List of gallery images.
             <ul>
-                <li><code>name</code>: Name of the department.</li>
-                <li><code>contacts</code>: List of contacts.
-                    <ul>
-                        <li><code>name</code>: Name of the contact.</li>
-                        <li><code>title</code>: Title of the contact.</li>
-                        <li><code>description</code>: Description of the contact.</li>
-                        <li><code>email</code>: Email of the contact.</li>
-                        <li><code>tel</code>: Telephone number of the contact.</li>
-                    </ul>
-                </li>
-                <li><code>gallery</code>: List of gallery images.
-                    <ul>
-                        <li><code>title</code>: Title of the image.</li>
-                        <li><code>src</code>: Source path of the image.</li>
-                    </ul>
-                </li>
-                <li><code>bfvwidgets</code>: List of BFV widgets.
-                    <ul>
-                        <li><code>teamid</code>: Team ID.</li>
-                        <li><code>clubid</code>: Club ID.</li>
-                        <li><code>compoundid</code>: Compound ID.</li>
-                        <li><code>type</code>: Type of the widget.</li>
-                    </ul>
-                </li>
+              <li><code class="language-plaintext highlighter-rouge">title</code>: Title of the image.</li>
+              <li><code class="language-plaintext highlighter-rouge">src</code>: Source path of the image.</li>
             </ul>
-        </li>
-    </ul>
-
-    <p><strong>Example</strong>:</p>
-    <pre><code>body:
-  departments:
-    - name: "Football"
-      contacts:
-        - name: "Don Joe"
-          title: "responsible"
-          description: "responsible for Example Sport"
-          email: "don.joe@example.com"
-          tel: "555123456789"
-      gallery: 
-        - title: "Example Image"
-          src: "example-image.webp"
-      bfvwidgets: 
-        - teamid: "60428905238095242232"
-          clubid: ""
-          compoundid: ""
-          type: "teamfull"
-</code></pre>
-
-    <h3><code>footer</code></h3>
-    <p><strong>Description</strong>: Configuration for the footer section.</p>
-    <p><strong>Options</strong>:</p>
-    <ul>
-        <li><code>background_image</code>: Path to the background image.</li>
-        <li><code>socials</code>: List of social media accounts.
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">bfvwidgets</code>: List of BFV widgets.
             <ul>
-                <li><code>account</code>: Social media account name.</li>
-                <li><code>link</code>: URL to the social media account.</li>
-                <li><code>image</code>: Path to the social media icon.</li>
+              <li><code class="language-plaintext highlighter-rouge">teamid</code>: Team ID.</li>
+              <li><code class="language-plaintext highlighter-rouge">clubid</code>: Club ID.</li>
+              <li><code class="language-plaintext highlighter-rouge">compoundid</code>: Compound ID.</li>
+              <li><code class="language-plaintext highlighter-rouge">type</code>: Type of the widget.</li>
             </ul>
-        </li>
-        <li><code>contacts</code>: List of contacts.
-            <ul>
-                <li><code>title</code>: Title of the contact.</li>
-                <li><code>name</code>: Name of the contact.</li>
-                <li><code>address</code>: Address of the contact.</li>
-                <li><code>email</code>: Email of the contact.</li>
-                <li><code>tel</code>: Telephone number of the contact.</li>
-                <li><code>responsible</code>: Boolean indicating if the contact is responsible.</li>
-            </ul>
-        </li>
+          </li>
+        </ul>
+      </li>
     </ul>
+  </li>
+  <li><strong>Example</strong>:
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">body</span><span class="pi">:</span>
+  <span class="na">departments</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Football"</span>
+      <span class="na">contacts</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Don</span><span class="nv"> </span><span class="s">Joe"</span>
+          <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">responsible"</span>
+          <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">responsible</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">Example</span><span class="nv"> </span><span class="s">Sport"</span>
+          <span class="na">email</span><span class="pi">:</span> <span class="s2">"</span><span class="s">don.joe@example.com"</span>
+          <span class="na">tel</span><span class="pi">:</span> <span class="s2">"</span><span class="s">555123456789"</span>
+      <span class="na">gallery</span><span class="pi">:</span> 
+        <span class="pi">-</span> <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Example</span><span class="nv"> </span><span class="s">Image"</span>
+          <span class="na">src</span><span class="pi">:</span> <span class="s2">"</span><span class="s">example-image.webp"</span>
+      <span class="na">bfvwidgets</span><span class="pi">:</span> 
+        <span class="pi">-</span> <span class="na">teamid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">60428905238095242232"</span>
+          <span class="na">clubid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+          <span class="na">compoundid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+          <span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">teamfull"</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
 
-    <p><strong>Example</strong>:</p>
-    <pre><code>footer:
-  background_image: "example-background.svg"
-  socials:
-    - account: "fc_example_1900"
-      link: "https://www.instagram.com/fc_example_1900/"
-      image: "insta.svg"
-  contacts:
-    - title: "Board"
-      name: "John Doe"
-      address: "Example str. 42 | 12345 City"
-      email: "john.doe@example.com"
-      tel: "555 / 123456"
-      responsible: true
-</code></pre>
+<h3 id="footer"><code class="language-plaintext highlighter-rouge">footer</code></h3>
 
-    <h3><code>fonts</code></h3>
-    <p><strong>Description</strong>: List of custom fonts.</p>
-    <p><strong>Options</strong>:</p>
+<ul>
+  <li><strong>Description</strong>: Configuration for the footer section.</li>
+  <li><strong>Options</strong>:
     <ul>
-        <li><code>name</code>: Name of the font.</li>
-        <li><code>src</code>: Source path of the font file.</li>
-        <li><code>font_weight</code>: Font weight.</li>
-        <li><code>font_style</code>: Font style.</li>
+      <li><code class="language-plaintext highlighter-rouge">background_image</code>: Path to the background image.</li>
+      <li><code class="language-plaintext highlighter-rouge">socials</code>: List of social media accounts.
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">account</code>: Social media account name.</li>
+          <li><code class="language-plaintext highlighter-rouge">link</code>: URL to the social media account.</li>
+          <li><code class="language-plaintext highlighter-rouge">image</code>: Path to the social media icon.</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">contacts</code>: List of contacts.
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">title</code>: Title of the contact.</li>
+          <li><code class="language-plaintext highlighter-rouge">name</code>: Name of the contact.</li>
+          <li><code class="language-plaintext highlighter-rouge">address</code>: Address of the contact.</li>
+          <li><code class="language-plaintext highlighter-rouge">email</code>: Email of the contact.</li>
+          <li><code class="language-plaintext highlighter-rouge">tel</code>: Telephone number of the contact.</li>
+          <li><code class="language-plaintext highlighter-rouge">responsible</code>: Boolean indicating if the contact is responsible.</li>
+        </ul>
+      </li>
     </ul>
+  </li>
+  <li><strong>Example</strong>:
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">footer</span><span class="pi">:</span>
+  <span class="na">background_image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">example-background.svg"</span>
+  <span class="na">socials</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">account</span><span class="pi">:</span> <span class="s2">"</span><span class="s">fc_example_1900"</span>
+      <span class="na">link</span><span class="pi">:</span> <span class="s2">"</span><span class="s">https://www.instagram.com/fc_example_1900/"</span>
+      <span class="na">image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">insta.svg"</span>
+  <span class="na">contacts</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Board"</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">John</span><span class="nv"> </span><span class="s">Doe"</span>
+      <span class="na">address</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Example</span><span class="nv"> </span><span class="s">str.</span><span class="nv"> </span><span class="s">42</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">12345</span><span class="nv"> </span><span class="s">City"</span>
+      <span class="na">email</span><span class="pi">:</span> <span class="s2">"</span><span class="s">john.doe@example.com"</span>
+      <span class="na">tel</span><span class="pi">:</span> <span class="s2">"</span><span class="s">555</span><span class="nv"> </span><span class="s">/</span><span class="nv"> </span><span class="s">123456"</span>
+      <span class="na">responsible</span><span class="pi">:</span> <span class="kc">true</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
 
-    <p><strong>Example</strong>:</p>
-    <pre><code>fonts:
-  - name: "Sofia"
-    src: "Sofia-Regular.woff"
-    font_weight: "normal"
-    font_style: "normal"
-</code></pre>
+<h3 id="fonts"><code class="language-plaintext highlighter-rouge">fonts</code></h3>
 
-    <h3><code>lang_file</code></h3>
-    <p><strong>Description</strong>: Path to the language file.</p>
-    <p><strong>Type</strong>: String</p>
-    <p><strong>Example</strong>: <code>lang_file: "en.yaml"</code></p>
-
-    <h3><code>linked_sites</code></h3>
-    <p><strong>Description</strong>: List of linked sites.</p>
-    <p><strong>Options</strong>:</p>
+<ul>
+  <li><strong>Description</strong>: List of custom fonts.</li>
+  <li><strong>Options</strong>:
     <ul>
-        <li><code>name</code>: Name of the site.</li>
-        <li><code>url</code>: URL of the site (if type is <code>link</code>).</li>
-        <li><code>type</code>: Type of the link (<code>link</code> or <code>dropdown</code>).</li>
-        <li><code>links</code>: List of sub-links (if type is <code>dropdown</code>).
-            <ul>
-                <li><code>name</code>: Name of the sub-link.</li>
-                <li><code>url</code>: URL of the sub-link.</li>
-            </ul>
-        </li>
+      <li><code class="language-plaintext highlighter-rouge">name</code>: Name of the font.</li>
+      <li><code class="language-plaintext highlighter-rouge">src</code>: Source path of the font file.</li>
+      <li><code class="language-plaintext highlighter-rouge">font_weight</code>: Font weight.</li>
+      <li><code class="language-plaintext highlighter-rouge">font_style</code>: Font style.</li>
     </ul>
-
-    <p><strong>Example</strong>:</p>
-    <pre><code>linked_sites:
-  - name: "Cloud"
-    url: "https://cloud.example.com/"
-    type: "link"
-  - name: "Files"
-    type: "dropdown"
-    links:
-      - name: "Membership"
-        url: "https://cloud.example.com/membership"
-      - name: "Rental"
-        url: "https://cloud.example.com/rental"
-  - name: "Calendars"
-    type: "dropdown"
-    links:
-      - name: "Sports home occupancy"
-        url: "https://cloud.example.com/calendars/occupancy"
-</code></pre>
-
-    <h3><code>custom_pages</code></h3>
-    <p><strong>Description</strong>: List of custom pages.</p>
-    <p><strong>Options</strong>:</p>
+  </li>
+  <li><strong>Example</strong>:
+```yaml
+fonts:
     <ul>
-        <li><code>name</code>: Name of the custom page.</li>
-        <li><code>file</code>: Path to the custom page file.</li>
+      <li>name: “Sofia”
+src: “Sofia-Regular.woff”
+font_weight: “normal”
+font_style: “normal”
+```</li>
     </ul>
+  </li>
+</ul>
 
-    <p><strong>Example</strong>:</p>
-    <pre><code>custom_pages:
-  - name: "Dataprotection"
-    file: "dataprotection.html"
-</code></pre>
+<h3 id="lang_file"><code class="language-plaintext highlighter-rouge">lang_file</code></h3>
 
-    <h2>Conclusion</h2>
-    <p>This guide provides an overview of the <code>config.yaml</code> file and its options. Customize the settings as needed to configure your project.</p>
-</body>
+<ul>
+  <li><strong>Description</strong>: Path to the language file.</li>
+  <li><strong>Type</strong>: String</li>
+  <li><strong>Example</strong>: <code class="language-plaintext highlighter-rouge">lang_file: "en.yaml"</code></li>
+</ul>
+
+<h3 id="linked_sites"><code class="language-plaintext highlighter-rouge">linked_sites</code></h3>
+
+<ul>
+  <li><strong>Description</strong>: List of linked sites.</li>
+  <li><strong>Options</strong>:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">name</code>: Name of the site.</li>
+      <li><code class="language-plaintext highlighter-rouge">url</code>: URL of the site (if type is <code class="language-plaintext highlighter-rouge">link</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">type</code>: Type of the link (<code class="language-plaintext highlighter-rouge">link</code> or <code class="language-plaintext highlighter-rouge">dropdown</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">links</code>: List of sub-links (if type is <code class="language-plaintext highlighter-rouge">dropdown</code>).
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">name</code>: Name of the sub-link.</li>
+          <li><code class="language-plaintext highlighter-rouge">url</code>: URL of the sub-link.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Example</strong>:
+```yaml
+linked_sites:
+    <ul>
+      <li>name: “Cloud”
+url: “https://cloud.example.com/”
+type: “link”</li>
+      <li>name: “Files”
+type: “dropdown”
+links:
+        <ul>
+          <li>name: “Membership”
+url: “https://cloud.example.com/membership”</li>
+          <li>name: “Rental”
+url: “https://cloud.example.com/rental”</li>
+        </ul>
+      </li>
+      <li>name: “Calendars”
+type: “dropdown”
+links:
+        <ul>
+          <li>name: “Sports home occupancy”
+url: “https://cloud.example.com/calendars/occupancy”
+```</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="custom_pages"><code class="language-plaintext highlighter-rouge">custom_pages</code></h3>
+
+<ul>
+  <li><strong>Description</strong>: List of custom pages.</li>
+  <li><strong>Options</strong>:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">name</code>: Name of the custom page.</li>
+      <li><code class="language-plaintext highlighter-rouge">file</code>: Path to the custom page file.</li>
+    </ul>
+  </li>
+  <li><strong>Example</strong>:
+```yaml
+custom_pages:
+    <ul>
+      <li>name: “Dataprotection”
+file: “dataprotection.html”
+```</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This guide provides an overview of the <code class="language-plaintext highlighter-rouge">config.yaml</code> file and its options. Customize the settings as needed to configure your project.</p>
+
+
+      <footer class="site-footer">
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </main>
+  </body>
 </html>
