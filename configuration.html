@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration Guide</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Configuration Guide</h1>
+    <p>This guide explains how to configure your project using the <code>config.yaml</code> file.</p>
+
+    <h2>Overview</h2>
+    <p>The <code>config.yaml</code> file contains various settings to customize your project. Below is a breakdown of each section and its options.</p>
+
+    <h2>Configuration Sections</h2>
+
+    <h3><code>tls</code></h3>
+    <p><strong>Description</strong>: Enable or disable TLS.</p>
+    <p><strong>Type</strong>: Boolean</p>
+    <p><strong>Example</strong>: <code>tls: false</code></p>
+
+    <h3><code>head</code></h3>
+    <p><strong>Description</strong>: Configuration for the HTML head section.</p>
+    <p><strong>Options</strong>:</p>
+    <ul>
+        <li><code>logo</code>: Path to the logo image.</li>
+        <li><code>name</code>: Name of the association.</li>
+        <li><code>icon</code>: Path to the favicon.</li>
+        <li><code>description</code>: Meta description for the site.</li>
+        <li><code>backgroundcolor</code>: Background color in RGB format.</li>
+        <li><code>textcolor</code>: Text color in RGB format.</li>
+        <li><code>slogan</code>:
+            <ul>
+                <li><code>font</code>: Font for the slogan.</li>
+                <li><code>top</code>: Top part of the slogan.</li>
+                <li><code>bottom</code>: Bottom part of the slogan.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Example</strong>:</p>
+    <pre><code>head:
+  logo: "logo.svg"
+  name: "Association Name"
+  icon: "logo.ico"
+  description: "Description"
+  backgroundcolor: "154, 93, 185"
+  textcolor: "255, 255, 255"
+  slogan:
+    font: "Sofia, sans-serif"
+    top: "Your"
+    bottom: "Slogan"
+</code></pre>
+
+    <h3><code>body</code></h3>
+    <p><strong>Description</strong>: Configuration for the body section.</p>
+    <p><strong>Options</strong>:</p>
+    <ul>
+        <li><code>departments</code>: List of departments.
+            <ul>
+                <li><code>name</code>: Name of the department.</li>
+                <li><code>contacts</code>: List of contacts.
+                    <ul>
+                        <li><code>name</code>: Name of the contact.</li>
+                        <li><code>title</code>: Title of the contact.</li>
+                        <li><code>description</code>: Description of the contact.</li>
+                        <li><code>email</code>: Email of the contact.</li>
+                        <li><code>tel</code>: Telephone number of the contact.</li>
+                    </ul>
+                </li>
+                <li><code>gallery</code>: List of gallery images.
+                    <ul>
+                        <li><code>title</code>: Title of the image.</li>
+                        <li><code>src</code>: Source path of the image.</li>
+                    </ul>
+                </li>
+                <li><code>bfvwidgets</code>: List of BFV widgets.
+                    <ul>
+                        <li><code>teamid</code>: Team ID.</li>
+                        <li><code>clubid</code>: Club ID.</li>
+                        <li><code>compoundid</code>: Compound ID.</li>
+                        <li><code>type</code>: Type of the widget.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Example</strong>:</p>
+    <pre><code>body:
+  departments:
+    - name: "Football"
+      contacts:
+        - name: "Don Joe"
+          title: "responsible"
+          description: "responsible for Example Sport"
+          email: "don.joe@example.com"
+          tel: "555123456789"
+      gallery: 
+        - title: "Example Image"
+          src: "example-image.webp"
+      bfvwidgets: 
+        - teamid: "60428905238095242232"
+          clubid: ""
+          compoundid: ""
+          type: "teamfull"
+</code></pre>
+
+    <h3><code>footer</code></h3>
+    <p><strong>Description</strong>: Configuration for the footer section.</p>
+    <p><strong>Options</strong>:</p>
+    <ul>
+        <li><code>background_image</code>: Path to the background image.</li>
+        <li><code>socials</code>: List of social media accounts.
+            <ul>
+                <li><code>account</code>: Social media account name.</li>
+                <li><code>link</code>: URL to the social media account.</li>
+                <li><code>image</code>: Path to the social media icon.</li>
+            </ul>
+        </li>
+        <li><code>contacts</code>: List of contacts.
+            <ul>
+                <li><code>title</code>: Title of the contact.</li>
+                <li><code>name</code>: Name of the contact.</li>
+                <li><code>address</code>: Address of the contact.</li>
+                <li><code>email</code>: Email of the contact.</li>
+                <li><code>tel</code>: Telephone number of the contact.</li>
+                <li><code>responsible</code>: Boolean indicating if the contact is responsible.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Example</strong>:</p>
+    <pre><code>footer:
+  background_image: "example-background.svg"
+  socials:
+    - account: "fc_example_1900"
+      link: "https://www.instagram.com/fc_example_1900/"
+      image: "insta.svg"
+  contacts:
+    - title: "Board"
+      name: "John Doe"
+      address: "Example str. 42 | 12345 City"
+      email: "john.doe@example.com"
+      tel: "555 / 123456"
+      responsible: true
+</code></pre>
+
+    <h3><code>fonts</code></h3>
+    <p><strong>Description</strong>: List of custom fonts.</p>
+    <p><strong>Options</strong>:</p>
+    <ul>
+        <li><code>name</code>: Name of the font.</li>
+        <li><code>src</code>: Source path of the font file.</li>
+        <li><code>font_weight</code>: Font weight.</li>
+        <li><code>font_style</code>: Font style.</li>
+    </ul>
+
+    <p><strong>Example</strong>:</p>
+    <pre><code>fonts:
+  - name: "Sofia"
+    src: "Sofia-Regular.woff"
+    font_weight: "normal"
+    font_style: "normal"
+</code></pre>
+
+    <h3><code>lang_file</code></h3>
+    <p><strong>Description</strong>: Path to the language file.</p>
+    <p><strong>Type</strong>: String</p>
+    <p><strong>Example</strong>: <code>lang_file: "en.yaml"</code></p>
+
+    <h3><code>linked_sites</code></h3>
+    <p><strong>Description</strong>: List of linked sites.</p>
+    <p><strong>Options</strong>:</p>
+    <ul>
+        <li><code>name</code>: Name of the site.</li>
+        <li><code>url</code>: URL of the site (if type is <code>link</code>).</li>
+        <li><code>type</code>: Type of the link (<code>link</code> or <code>dropdown</code>).</li>
+        <li><code>links</code>: List of sub-links (if type is <code>dropdown</code>).
+            <ul>
+                <li><code>name</code>: Name of the sub-link.</li>
+                <li><code>url</code>: URL of the sub-link.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Example</strong>:</p>
+    <pre><code>linked_sites:
+  - name: "Cloud"
+    url: "https://cloud.example.com/"
+    type: "link"
+  - name: "Files"
+    type: "dropdown"
+    links:
+      - name: "Membership"
+        url: "https://cloud.example.com/membership"
+      - name: "Rental"
+        url: "https://cloud.example.com/rental"
+  - name: "Calendars"
+    type: "dropdown"
+    links:
+      - name: "Sports home occupancy"
+        url: "https://cloud.example.com/calendars/occupancy"
+</code></pre>
+
+    <h3><code>custom_pages</code></h3>
+    <p><strong>Description</strong>: List of custom pages.</p>
+    <p><strong>Options</strong>:</p>
+    <ul>
+        <li><code>name</code>: Name of the custom page.</li>
+        <li><code>file</code>: Path to the custom page file.</li>
+    </ul>
+
+    <p><strong>Example</strong>:</p>
+    <pre><code>custom_pages:
+  - name: "Dataprotection"
+    file: "dataprotection.html"
+</code></pre>
+
+    <h2>Conclusion</h2>
+    <p>This guide provides an overview of the <code>config.yaml</code> file and its options. Customize the settings as needed to configure your project.</p>
+</body>
+</html>
