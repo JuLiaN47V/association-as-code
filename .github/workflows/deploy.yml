@@ -21,14 +21,19 @@ jobs:
       with:
         ruby-version: '3.3.6'
 
-    - name: Install Jekyll and Bundler
-      run: gem install jekyll bundler
+    - name: Install Bundler
+      run: gem install bundler
+
+    - name: Install dependencies
+      run: bundle install
+      working-directory: ./docs
 
     - name: Build Jekyll site
-      run: bundle exec jekyll build -d docs
+      run: bundle exec jekyll build
+      working-directory: ./docs
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
+        publish_dir: ./docs/_site
