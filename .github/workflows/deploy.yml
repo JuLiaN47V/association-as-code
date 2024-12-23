@@ -32,15 +32,8 @@ jobs:
       run: bundle exec jekyll build
       working-directory: ./docs
 
-    - name: List _site directory
+    - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs/_site
-
-
-    - name: List gh-pages branch
-      run: |
-        git fetch origin gh-pages
-        git checkout gh-pages
-        ls -la
