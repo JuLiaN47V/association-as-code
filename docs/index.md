@@ -3,7 +3,7 @@ layout: default
 title: "Home"
 ---
 
-# Welcome to the Project Documentation
+# Documentation
 
 Below are the available guides:
 
