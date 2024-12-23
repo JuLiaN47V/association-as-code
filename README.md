@@ -10,4 +10,4 @@ Licensed under [Apache 2.0](https://github.com/JuLiaN47V/association-as-code/blo
 
 ## Documentation
 
-The full documentation for this project is available on [GitHub Pages](https://your-github-username.github.io/association-as-code/).
+The full documentation for this project is available on [GitHub Pages](https://julian47v.github.io/association-as-code/).
