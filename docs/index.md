@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Home"
+title: "Association as Code"
 ---
 
 # Documentation
