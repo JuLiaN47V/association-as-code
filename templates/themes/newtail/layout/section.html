@@ -1,4 +1,6 @@
 {{ $lang := .lang }}
+
+
 {{ range $department := .config.Body.Departments }}
 <div class="row">
     <h1 class="text-center mt-4" id="{{ $department.Name }}">{{ $department.Name }}</h1>

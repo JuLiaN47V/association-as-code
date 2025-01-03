@@ -12,6 +12,7 @@ type Config struct {
 	TLS bool `yaml:"tls"`
 	LogToFile string `yaml:"log_to_file"`
 	Theme string `yaml:"theme"`
+	Strapi string `yaml:"strapi"`
 	Head struct {
 		Logo        string `yaml:"logo"`
 		Name        string `yaml:"name"`

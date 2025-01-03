@@ -1,5 +1,6 @@
 tls: false
 theme: newtail
+strapi: "http://localhost:1337"
 head:
   logo: "logo.svg"
   name: "Association Name"
