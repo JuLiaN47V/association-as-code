@@ -1,5 +1,11 @@
+---
+layout: default
+title: "Association as Code"
+---
+
 # Documentation
 
-Welcome to the project documentation. Below are the available guides:
+Below are the available guides:
 
 - [Configuration Guide](configuration.md)
+- [Docker Guide](docker.md)

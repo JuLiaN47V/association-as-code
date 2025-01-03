@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Configuration Guide"
+---
+
 # Configuration Guide
 
 This guide explains how to configure your project using the `config.yaml` file.
